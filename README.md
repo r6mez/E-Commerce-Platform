@@ -4,7 +4,8 @@ This is a simple e-commerce platform built with the Laravel framework.
 
 ## To-Do
 - E-commerce  
-    - [ ] Setup project - github - supabase
+    - [X] Setup project - github - supabase
+    - [ ] Implement core models and migrations
     - [ ] Auth -> login / signup
     - [ ] Market Page
     - [ ] Product Page
