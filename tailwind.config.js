@@ -11,8 +11,13 @@ export default {
 
     theme: {
         extend: {
+            colors: {
+                'p-dark': '#211C12',
+                'p-medium': '#453B26',
+                'p-light': '#C7B594',
+            },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Roboto', ...defaultTheme.fontFamily.sans],
             },
         },
     },
