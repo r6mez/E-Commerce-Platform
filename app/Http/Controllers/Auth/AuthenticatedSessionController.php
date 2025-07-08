@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
     public function create()
     {
         if (Auth::check()) {
-            return redirect()->route('dashboard');
+            return redirect()->route('/');
         }
         return view('auth.login');
     }
@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('dashboard');
+        return redirect()->route('/');
     }
 
     /**
