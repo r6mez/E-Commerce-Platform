@@ -14,8 +14,16 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
+<<<<<<< HEAD
     public function create(): View
     {
+=======
+    public function create()
+    {
+        if (Auth::check()) {
+            return redirect()->route('dashboard');
+        }
+>>>>>>> 7094211 (create login and sign up pages)
         return view('auth.login');
     }
 
@@ -28,7 +36,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+<<<<<<< HEAD
         return redirect()->intended(route('dashboard', absolute: false));
+=======
+        return redirect()->route('dashboard');
+>>>>>>> 7094211 (create login and sign up pages)
     }
 
     /**

@@ -16,6 +16,10 @@ class LoginRequest extends FormRequest
      */
     public function authorize(): bool
     {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7094211 (create login and sign up pages)
         return true;
     }
 
@@ -40,10 +44,15 @@ class LoginRequest extends FormRequest
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
+<<<<<<< HEAD
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
+=======
+        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+            RateLimiter::hit($this->throttleKey());
+>>>>>>> 7094211 (create login and sign up pages)
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
             ]);
@@ -80,6 +89,10 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
+<<<<<<< HEAD
         return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+=======
+        return Str::transliterate(Str::lower($this->string('email')) . '|' . $this->ip());
+>>>>>>> 7094211 (create login and sign up pages)
     }
 }

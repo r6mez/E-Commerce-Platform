@@ -1,5 +1,9 @@
 <?php
 
+<<<<<<< HEAD
+=======
+use App\Models\Country;
+>>>>>>> 7094211 (create login and sign up pages)
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +19,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+<<<<<<< HEAD
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+=======
+            $table->string('password');
+            $table->enum('type', ['user', 'seller', 'admin']);
+            $table->foreignIdFor(Country::class);
+            $table->timestamp('email_verified_at')->nullable();
+>>>>>>> 7094211 (create login and sign up pages)
             $table->rememberToken();
             $table->timestamps();
         });
