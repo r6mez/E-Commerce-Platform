@@ -23,6 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'type',
+        'country_id',
     ];
 
     /**
@@ -48,15 +50,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function country() : BelongsTo {
+    public function country(): BelongsTo
+    {
         return $this->belongsTo(Country::class);
     }
 
-    public function products() : HasMany {
+    public function products(): HasMany
+    {
         return $this->hasMany(Product::class);
     }
 
-    public function orders() : HasMany {
+    public function orders(): HasMany
+    {
         return $this->hasMany(Order::class);
     }
 }
