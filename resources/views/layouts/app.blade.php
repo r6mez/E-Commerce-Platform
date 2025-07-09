@@ -15,7 +15,37 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+           <div id="background-container"></div>
+
+    <style>
+        #background-container {
+            position: fixed;
+            top: -50px; 
+            left: -50px; 
+            width: calc(100% + 100px);
+            height: calc(100% + 100px);
+            background-image: url('{{ asset('background.png') }}');
+            background-size: cover;
+            background-position: center center;
+            filter: brightness(0.8) blur(3px); 
+            z-index: -1;
+            transition: background-position 0.1s linear; 
+        }
+    </style>
+
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            const container = document.getElementById('background-container');
+            const speed = 0.5; 
+
+            const x = (e.clientX / window.innerWidth - 0.5) * speed * 100;
+            const y = (e.clientY / window.innerHeight - 0.5) * speed * 100;
+            
+
+            container.style.backgroundPosition = `calc(50% + ${x}%) calc(50% + ${y}%)`;
+        });
+    </script>
+        <div class="min-h-screen">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
