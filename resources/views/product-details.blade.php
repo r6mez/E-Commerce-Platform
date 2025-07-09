@@ -1,11 +1,29 @@
 <x-app-layout>
-    <div class="min-h-screen flex items-center justify-center bg-transparent">
-        <div class="bg-p-dark/70 backdrop-blur-md shadow-2xl rounded-2xl w-full max-w-7xl p-0 md:p-0 overflow-hidden">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
-                <div class="flex justify-center items-center">
-                    <img src="{{ $product->photos[0]->photo_url }}" alt="{{ $product->name }}" class="w-full max-h-96 object-contain rounded-xl shadow-lg border border-p-light/10">
+    <div class="absolute top-6 left-6 z-20">
+        <button onclick="window.history.back()" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-p-dark/80 hover:bg-p-dark/90 text-p-light text-sm font-semibold shadow transition-all border border-p-light/20">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+            Back
+        </button>
+    </div>
+    <div class="fixed inset-0 z-10 bg-transparent p-0 m-0 overflow-auto">
+        <div class="bg-p-dark/70 backdrop-blur-md shadow-2xl rounded-none min-h-screen min-w-full p-0 md:p-0 overflow-visible flex flex-col justify-center">
+            <div class="flex-1 flex flex-col justify-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-0 h-full">
+                <div class="flex flex-col items-center justify-center h-full" x-data="{ mainImg: '{{ $product->photos[0]->photo_url }}' }">
+                    <img :src="mainImg" alt="{{ $product->name }}" class="w-full max-h-96 object-contain">
+                    <div class="flex gap-2 m-4 overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-p-light/30 scrollbar-track-transparent">
+                        @foreach($product->photos as $photo)
+                            <img
+                                src="{{ $photo->photo_url }}"
+                                alt="Thumbnail"
+                                class="w-16 h-16 object-cover rounded-lg border-2 cursor-pointer transition-all duration-150 hover:border-p-light/20"
+                                :class="mainImg === '{{ $photo->photo_url }}' ? 'border-p-light ring-2 ring-p-light' : 'border-p-light/20'"
+                                @click="mainImg = '{{ $photo->photo_url }}'"
+                            >
+                        @endforeach
+                    </div>
                 </div>
-                <div class="flex flex-col justify-between p-8 md:p-12 bg-p-dark/70">
+                <div class="flex flex-col justify-between p-8 md:p-12 bg-p-dark/70 h-full">
                     <div>
                         <h1 class="text-4xl md:text-5xl font-extrabold text-p-light mb-4 tracking-tight drop-shadow">{{ $product->name }}</h1>
                         <p class="text-p-light/80 text-base mb-5">Category: <span class="font-semibold text-p-light">{{ $product->category->name }}</span></p>
@@ -57,11 +75,12 @@
                                 </div>
                             </div>
                         </div>
-                        <x-primary-button class="w-full justify-center py-4 text-lg rounded-xl shadow-lg bg-gradient-to-r from-green-500/80 to-green-400/80 hover:from-green-600 hover:to-green-500 transition-all">
+                        <x-primary-button  class="w-full justify-center py-4 text-lg rounded-xl shadow-lg bg-gradient-to-r from-green-500/80 to-green-400/80 hover:from-green-600 hover:to-green-500 transition-all">
                             Add to Cart
                         </x-primary-button>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

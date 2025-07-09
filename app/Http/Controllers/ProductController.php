@@ -17,7 +17,7 @@ class ProductController extends Controller
         $sellerCountry = $product->user->country;
         $price = null;
 
-        $priceInUsd = $product->price / $sellerCountry->usd_value;
+        $priceInUsd = $product->price / ((int) $sellerCountry->usd_value);
         $convertedPrice = round($priceInUsd * $userCountry->usd_value, 2);
 
         if($userCountry == $sellerCountry){
