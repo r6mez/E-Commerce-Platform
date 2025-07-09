@@ -50,9 +50,9 @@
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white dark:bg-gray-800 shadow">
+                <header class="bg-white dark:bg-p-dark shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+                        <h1 class="text-p-light text-3xl font-bold">{{ $header }}</h1>
                     </div>
                 </header>
             @endisset
