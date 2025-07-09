@@ -12,14 +12,12 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @guest
-                        <x-nav-link :href="route('/')" :active="request()->routeIs('/')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
-                            News
-                        </x-nav-link>
-                        {{-- <x-nav-link :href="route('market')" :active="request()->routeIs('market')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
-                            Market
-                        </x-nav-link> --}}
-                    @endguest
+                    <x-nav-link :href="route('/')" :active="request()->routeIs('/')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
+                        Home
+                    </x-nav-link>
+                    {{-- <x-nav-link :href="route('market')" :active="request()->routeIs('market')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
+                        Market
+                    </x-nav-link> --}}
                     @auth
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
                             Dashboard
