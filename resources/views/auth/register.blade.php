@@ -11,21 +11,25 @@
         <div>
             <x-input-label for="name" value="Name" class="text-p-light" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         <div class="mt-4">
             <x-input-label for="email" value="Email" class="text-p-light" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <div class="mt-4">
             <x-input-label for="password" value="Password" class="text-p-light" />
             <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required />
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <div class="mt-4">
             <x-input-label for="password_confirmation" value="Confirm Password" class="text-p-light" />
             <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required />
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
         <div class="mt-4 flex space-x-4">
@@ -35,6 +39,7 @@
                     <option value="user">user</option>
                     <option value="seller">seller</option>
                 </x-select-input>
+                <x-input-error :messages="$errors->get('type')" class="mt-2" />
             </div>
 
             <div class="w-1/2">
@@ -44,6 +49,7 @@
                     <option value="{{ $country->id }}">{{ $country->name }}</option>
                     @endforeach
                 </x-select-input>
+                <x-input-error :messages="$errors->get('country')" class="mt-2" />
             </div>
         </div>
 

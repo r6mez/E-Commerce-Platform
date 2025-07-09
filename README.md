@@ -4,16 +4,16 @@ This is a simple e-commerce platform built with the Laravel framework.
 
 ## To-Do
 - E-commerce  
-    - [X] Setup project - github - supabase
-    - [ ] Implement core models and migrations
-    - [ ] Auth -> login / signup
+    - [X] Setup project, github and supabase
+    - [X] Implement core models and migrations
+    - [X] Auth, login and signup pages
+    - [X] Hirtorical Event Page
     - [ ] Market Page
     - [ ] Product Page
-    - [ ] Cart 
+    - [ ] Cart Page
     - [ ] Profile + Order History Page
     - [ ] View your products + Add Product Page
     - [ ] Admin Dashboard (CRUD)
-    - [ ] Hirtorical Event Page
     - [ ] Reviews
 - CSV 
 - Email 
