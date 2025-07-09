@@ -1,15 +1,19 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product; // Import Product model
 use App\Models\Category; // Import Category model
 
 Route::get('/', function () {
-    $products = Product::take(6)->get(); // Fetch 6 products
-    $categories = Category::all(); // Fetch all categories
+    $products = Product::take(6)->get(); 
+    $categories = Category::all(); 
     return view('welcome', compact('products', 'categories'));
 })->name('/');
+
+
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
