@@ -11,6 +11,13 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
+    public function show(Request $request): View
+    {
+
+        $user = Auth::user();
+        return view('profile.orders', compact('user'));
+    }
     /**
      * Display the user's profile form.
      */
