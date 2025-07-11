@@ -1,23 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
-use App\Models\Category;
-use Illuminate\Support\Facades\Route;
-use App\Models\Product;
-use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    $products = Product::take(6)->get(); 
-    $categories = Category::all(); 
-
-    foreach ($products as $product) {
-        $product->price = $product->price * $product->user->country->usd_value;
-    }
-
-    return view('welcome', compact('products', 'categories'));
-})->name('/');
+Route::get('/', [HomeController::class, 'show'])->name('/');
 
 Route::get('/orders', function () {
     return view('profile.orders');
