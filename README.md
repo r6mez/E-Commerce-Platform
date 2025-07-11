@@ -8,8 +8,8 @@ This is a simple e-commerce platform built with the Laravel framework.
     - [X] Implement core models and migrations
     - [X] Auth, login and signup pages
     - [X] Hirtorical Event Page
+    - [X] Product Page
     - [ ] Market Page
-    - [ ] Product Page
     - [ ] Cart Page
     - [ ] Profile + Order History Page
     - [ ] View your products + Add Product Page
