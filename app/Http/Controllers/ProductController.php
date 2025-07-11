@@ -27,6 +27,6 @@ class ProductController extends Controller
         $isSameCountry = ($userCountry == $sellerCountry);
         $symbol = $user->country->currency_symbol;
 
-        return view('product-details', compact('product', 'price', 'isSameCountry', 'convertedPrice', 'symbol'));
+        return view('product.show', compact('product', 'price', 'isSameCountry', 'convertedPrice', 'symbol'));
     }
 }
