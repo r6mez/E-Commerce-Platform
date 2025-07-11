@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function show(){
+    public function index(){
         $products = Product::take(6)->get(); 
         $categories = Category::all(); 
 
@@ -16,7 +16,7 @@ class HomeController extends Controller
             $product->price = $product->price * $product->user->country->usd_value;
         }
 
-        return view('home', compact('products', 'categories'));
+        return view('home.index', compact('products', 'categories'));
 
     }
 }
