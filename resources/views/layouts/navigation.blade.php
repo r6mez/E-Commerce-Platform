@@ -15,12 +15,12 @@
                     <x-nav-link :href="route('/')" :active="request()->routeIs('/')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
                         Home
                     </x-nav-link>
-                    {{-- <x-nav-link :href="route('market')" :active="request()->routeIs('market')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
-                        Market
-                    </x-nav-link> --}}
                     @auth
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
                             Dashboard
+                        </x-nav-link>
+                        <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
+                            Market
                         </x-nav-link>
                         {{-- <x-nav-link :href="route('orders')" :active="request()->routeIs('orders')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
                             Orders
@@ -95,9 +95,17 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-p-light hover:text-p-light/80 hover:bg-p-medium">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('/')" :active="request()->routeIs('/')" class="text-p-light hover:text-p-light/80 hover:bg-p-medium">
+                Home
             </x-responsive-nav-link>
+            @auth
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-p-light hover:text-p-light/80 hover:bg-p-medium">
+                    Dashboard
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')" class="text-p-light hover:text-p-light/80 hover:bg-p-medium">
+                    Market
+                </x-responsive-nav-link>
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->
@@ -126,9 +134,17 @@
                         onclick="event.preventDefault(); this.closest('form').submit();"
                                 class="text-p-light hover:text-p-light/80 hover:bg-p-medium">
                                 Log Out
-                            </x-responsive-nav-link>
+                        </x-responsive-nav-link>
                     </form>
                 @endauth
+                @guest
+                    <x-responsive-nav-link :href="route('login')" class="text-p-light hover:text-p-light/80 hover:bg-p-medium">
+                        Login
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('register')" class="text-p-light hover:text-p-light/80 hover:bg-p-medium">
+                        Register
+                    </x-responsive-nav-link>
+                @endguest
             </div>
         </div>
     </div>

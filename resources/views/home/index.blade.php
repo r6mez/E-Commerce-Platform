@@ -23,7 +23,7 @@
                         <div class="p-6">
                             <h3 class="font-bold text-2xl text-p-light">{{ $product->name }}</h3>
                             <div class="flex justify-between items-center">
-                                <span class="text-xl font-bold text-p-light/70">${{ number_format($product->price, 2) }}</span>
+                                <span class="text-xl font-bold text-p-light/70">{{ $product->user->country->currency_symbol }}{{ $product->price }}</span>
                                 <a href="/products/{{ $product->id }}" class="bg-p-light hover:bg-p-light/80 text-p-dark font-bold py-2 px-4 rounded-full text-sm transition duration-300">View Details</a>
                             </div>
                         </div>

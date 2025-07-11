@@ -8,8 +8,8 @@
 ])
 
 <div class="relative flex items-center animate-timeline-fadein">
-    <div class="flex items-center bg-p-medium rounded-xl shadow-lg px-8 py-6 w-full md:w-4/5 mx-auto border border-p-light transition-all duration-500 ease-out cursor-pointer card-hover-animate">
-        <div class="flex-shrink-0 mr-8 flex flex-col items-center justify-center">
+    <div class="flex flex-col md:flex-row items-center bg-p-medium rounded-xl shadow-lg px-8 py-6 w-full md:w-4/5 mx-auto border border-p-light transition-all duration-500 ease-out cursor-pointer card-hover-animate">
+        <div class="flex-shrink-0 flex flex-col items-center justify-center mb-4 md:mb-0 md:mr-8">
             <div class="flex items-center space-x-2 mb-2">
                 <span class="text-8xl select-none">{{ $flag }}</span>
                 @if($flag2)
