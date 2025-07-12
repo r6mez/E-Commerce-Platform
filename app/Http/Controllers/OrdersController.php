@@ -13,4 +13,10 @@ class OrdersController extends Controller
         $orders = Order::where('user_id', Auth::id())->get();
         return view('profile.orders', compact('orders'));
     }
+    public function showAll(Request $request)
+    {
+        $orders = Order::paginate(5);
+        return view('admin.orders.manage', compact('orders'));
+    }
 }
+ini_set('max_execution_time', 60);

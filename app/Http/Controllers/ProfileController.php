@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Country;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +21,43 @@ class ProfileController extends Controller
         $user = Auth::user();
         return view('profile.orders', compact('user'));
     }
+    public function showAll(Request $request)
+    {
+        $users = User::orderBy('id')->get();
+        return view('admin.users.manage', compact('users'));
+    }
+    public function showUserInfo($id): View
+    {
+        $user = User::with('orders')->findOrFail($id);
+        return view('admin.users.orders', compact('user'));
+    }
+    public function storeUser(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'type' => 'required|in:user,seller,admin',
+            'country_id' => 'required|exists:countries,id',
+            'password' => 'required|string',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'type' => $request->type,
+            'country_id' => $request->country_id,
+            'password' => bcrypt($request->password),
+        ]);
+
+        return redirect()->route('manageUsers');
+    }
+    public function createUser(): View
+    {
+        $countries = Country::all();
+        return view('admin.users.add', [
+            'countries' => $countries,
+        ]);
+    }
     /**
      * Display the user's profile form.
      */
@@ -26,6 +66,35 @@ class ProfileController extends Controller
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
+    }
+    public function editUserInfo($id): View
+    {
+        $countries = Country::all();
+        $user = User::findOrFail($id);
+        return view('admin.users.edit', [
+            'user' => $user,
+            'countries' => $countries,
+        ]);
+    }
+    public function updateUserInfo(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'type' => 'required|in:admin,seller,user',
+            'country_id' => 'required|exists:countries,id',
+            'password' => 'required|string',
+        ]);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'type' => $request->type,
+            'country_id' => $request->country_id,
+            'password' => Hash::make($request->password),
+        ]);
+        return redirect()->route('manageUsers');
     }
 
     /**
@@ -63,5 +132,11 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+    public function destroyUser($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('manageUsers');
     }
 }
