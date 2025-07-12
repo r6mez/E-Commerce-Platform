@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CartItemController;
+use App\Http\Controllers\CheckoutController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
@@ -24,6 +26,13 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('product.show');
     Route::get('/products', [ProductController::class, 'index'])->name('product.index');
+
+    Route::post('/cart', [CartItemController::class, 'store'])->name('cart.store');
+    Route::get('/cart', [CartItemController::class, 'index'])->name('cart.index');
+    Route::delete('/cart/{cartItem}', [CartItemController::class, 'destroy'])->name('cart.destroy');
+    Route::patch('/cart/{cartItem}', [CartItemController::class, 'update'])->name('cart.update');
+
+    Route::post('/cart/checkout', [CheckoutController::class, 'checkout'])->name('cart.checkout');
 });
 
 require __DIR__ . '/auth.php';

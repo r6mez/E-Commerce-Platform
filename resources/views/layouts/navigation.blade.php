@@ -22,11 +22,11 @@
                         <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
                             Market
                         </x-nav-link>
+                        <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
+                            Cart
+                        </x-nav-link>
                         {{-- <x-nav-link :href="route('orders')" :active="request()->routeIs('orders')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
                             Orders
-                        </x-nav-link>
-                        <x-nav-link :href="route('cart')" :active="request()->routeIs('cart')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
-                            Cart
                         </x-nav-link> --}}
                     @endauth
                 </div>
