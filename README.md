@@ -9,9 +9,9 @@ This is a simple e-commerce platform built with the Laravel framework.
     - [X] Auth, login and signup pages
     - [X] Hirtorical Event Page
     - [X] Product Page
-    - [ ] Market Page
+    - [X] Market Page
+    - [X] Profile + Order History Page
     - [ ] Cart Page
-    - [ ] Profile + Order History Page
     - [ ] View your products + Add Product Page
     - [ ] Admin Dashboard (CRUD)
     - [ ] Reviews

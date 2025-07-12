@@ -1,5 +1,37 @@
 <x-app-layout>
     <div class="absolute top-6 left-6 z-20">
+    <div class="fixed top-8 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
+        @if (session('success'))
+            <div 
+                x-data="{ show: true }" 
+                x-init="setTimeout(() => show = false, 3500)" 
+                x-show="show" 
+                x-transition:leave="transition ease-in duration-300" 
+                x-transition:leave-start="opacity-100" 
+                x-transition:leave-end="opacity-0" 
+                class="mb-4 px-6 py-4 rounded-lg bg-green-500/90 text-white text-center font-semibold shadow-lg border border-green-200/60 animate-fade-in"
+            >
+                {{ session('success') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div 
+                x-data="{ show: true }" 
+                x-init="setTimeout(() => show = false, 4500)" 
+                x-show="show" 
+                x-transition:leave="transition ease-in duration-300" 
+                x-transition:leave-start="opacity-100" 
+                x-transition:leave-end="opacity-0" 
+                class="mb-4 px-6 py-4 rounded-lg bg-red-500/90 text-white text-center font-semibold shadow-lg border border-red-200/60 animate-fade-in"
+            >
+                <ul class="list-disc list-inside text-left inline-block">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
         <button onclick="window.history.back()" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-p-dark/80 hover:bg-p-dark/90 text-p-light text-sm font-semibold shadow transition-all border border-p-light/20">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
             Back
@@ -75,13 +107,36 @@
                                 </div>
                             </div>
                         </div>
-                        <x-primary-button  class="w-full justify-center py-4 text-lg rounded-xl shadow-lg bg-gradient-to-r from-green-500/80 to-green-400/80 hover:from-green-600 hover:to-green-500 transition-all">
-                            Add to Cart
-                        </x-primary-button>
+                        <form method="POST" action="{{ route('cart.store') }}" class="space-y-4">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <div class="mb-4">
+                                <label for="quantity" class="block text-p-light/70 text-base mb-2">Quantity</label>
+                                <div class="flex items-center gap-2">
+                                    <button type="button" onclick="const q=document.getElementById('quantity');if(q.value>1)q.value--" class="px-3 py-2 rounded-l-lg bg-p-dark/60 border border-p-light/20 text-p-light hover:bg-p-dark/80 focus:outline-none focus:ring-2 focus:ring-green-400/60 transition-all">-</button>
+                                    <input type="number" id="quantity" name="quantity" min="1" max="{{ $product->quantity }}" value="1" class="w-20 px-3 py-2 border-t border-b border-p-light/20 bg-p-dark/40 text-p-light focus:outline-none focus:ring-2 focus:ring-green-400/60 text-center hide-number-spin" required>
+                                    <button type="button" onclick="const q=document.getElementById('quantity');if(parseInt(q.value)<{{ $product->quantity }})q.value++" class="px-3 py-2 rounded-r-lg bg-p-dark/60 border border-p-light/20 text-p-light hover:bg-p-dark/80 focus:outline-none focus:ring-2 focus:ring-green-400/60 transition-all">+</button>
+                                </div>
+                            </div>
+                            <x-primary-button type="submit" class="w-full justify-center py-4 text-lg rounded-xl shadow-lg bg-gradient-to-r from-green-500/80 to-green-400/80 hover:from-green-600 hover:to-green-500 transition-all">
+                                Add to Cart
+                            </x-primary-button>
+                        </form>
                     </div>
                 </div>
             </div>
             </div>
         </div>
     </div>
+
+    <style>
+        .hide-number-spin::-webkit-inner-spin-button, .hide-number-spin::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .hide-number-spin {
+            -moz-appearance: textfield;
+        }
+    </style>
 </x-app-layout>
