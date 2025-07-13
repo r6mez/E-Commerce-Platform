@@ -7,18 +7,18 @@ use App\Models\Country;
 
 class CountryController extends Controller
 {
-    public function showAll(Request $request)
+    public function index(Request $request)
     {
         $countries = Country::all();
         return view('dashboard.countries.manage', compact('countries'));
     }
 
-    public function createCountry()
+    public function create()
     {
         return view('dashboard.countries.add');
     }
 
-    public function storeCountry(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -38,13 +38,13 @@ class CountryController extends Controller
         return redirect()->route('manageCountries');
     }
 
-    public function editCountry($id)
+    public function edit($id)
     {
         $country = Country::findOrFail($id);
         return view('dashboard.countries.edit', compact('country'));
     }
 
-    public function updateCountry(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $country = Country::findOrFail($id);
         $request->validate([
@@ -65,7 +65,7 @@ class CountryController extends Controller
         return redirect()->route('manageCountries');
     }
 
-    public function destroyCountry($id)
+    public function destroy($id)
     {
         $country = Country::findOrFail($id);
         $country->delete();

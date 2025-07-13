@@ -13,25 +13,26 @@ class OrdersController extends Controller
         $orders = Order::where('user_id', Auth::id())->get();
         return view('order.index', compact('orders'));
     }
-    public function showAll(Request $request)
+
+    public function indexAll(Request $request)
     {
-        $orders = Order::paginate(5);
+        $orders = Order::with(['user', 'products'])->get();
         return view('dashboard.orders.manage', compact('orders'));
     }
 
-    public function showOrder($id)
+    public function show($id)
     {
         $order = Order::findOrFail($id);
         return view('dashboard.orders.show', compact('order'));
     }
 
-    public function editOrder($id)
+    public function edit($id)
     {
         $order = Order::findOrFail($id);
         return view('dashboard.orders.edit', compact('order'));
     }
 
-    public function updateOrder(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $order = Order::findOrFail($id);
         $request->validate([
@@ -42,11 +43,10 @@ class OrdersController extends Controller
         return redirect()->route('manageOrders');
     }
 
-    public function destroyOrder($id)
+    public function destroy($id)
     {
         $order = Order::findOrFail($id);
         $order->delete();
         return redirect()->route('manageOrders');
     }
 }
-ini_set('max_execution_time', 60);

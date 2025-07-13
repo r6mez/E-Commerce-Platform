@@ -14,7 +14,7 @@
                             @csrf
                         </form>
 
-                        <form method="post" action="{{ route('users.updateUserInfo', $user->id) }}" class="mt-6 space-y-6">
+                        <form method="post" action="{{ route('users.update', $user->id) }}" class="mt-6 space-y-6">
                             @csrf
                             @method('PUT')
                             <div>

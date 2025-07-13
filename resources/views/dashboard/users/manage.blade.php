@@ -58,15 +58,15 @@
                                         {{$user->country->name ?? 'UnKnown'}}
                                     </td>
                                     <td class="px-6 py-4 flex gap-2 uppercase">
-                                        <a href="{{ route('users.showUserInfo', $user->id) }}"
+                                        <a href="{{ route('users.show', $user->id) }}"
                                             class="bg-p-medium hover:bg-p-light text-white px-3 py-1 rounded text-xs font-semibold transition duration-150">
                                             Details
                                         </a>
-                                        <a href="{{ route('users.editUserInfo', $user->id) }}"
+                                        <a href="{{ route('users.edit', $user->id) }}"
                                             class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-xs font-semibold transition">
                                             Edit
                                         </a>
-                                        <form action="{{ route('users.destroyUser', $user->id) }}" method="POST">
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
