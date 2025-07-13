@@ -16,7 +16,7 @@
                             <p><span class="font-bold">Email:</span> {{ $user->email }}</p>
                             <p><span class="font-bold">Country:</span> {{ $user->country->name }}</p>
                             <p><span class="font-bold">Type:</span> {{ $user->type }}</p>
-                            <a href="{{ route('users.editUserInfo',$user->id) }}" class="text-sm border border-gray-300 px-3 py-1 rounded inline-block mt-4">
+                            <a href="{{ route('users.edit',$user->id) }}" class="text-sm border border-gray-300 px-3 py-1 rounded inline-block mt-4">
                                 Edit Profile
                             </a>
                         </div>

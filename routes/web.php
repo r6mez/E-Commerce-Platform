@@ -8,7 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CheckoutController;
-
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\EnsureIsAdmin;
 
 Route::get('/', [HomeController::class, 'index'])->name('/');
@@ -35,34 +35,34 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', function () { return view('dashboard.dashboard'); })->name('dashboard');
         
         Route::prefix('dashboard')->group(function () {
-            Route::get('/products', [ProductController::class, 'showAll'])->name('manageProducts');
-            Route::get('/products/add', [ProductController::class, 'createProduct'])->name('products.add');
-            Route::post('/products', [ProductController::class, 'storeProduct'])->name('products.storeProduct');
-            Route::get('/products/{id}/edit', [ProductController::class, 'editProductInfo'])->name('products.editProductInfo');
-            Route::get('/products/{id}', [ProductController::class, 'showProductInfo'])->name('products.showProductInfo');
-            Route::put('/products/{id}', [ProductController::class, 'updateProductInfo'])->name('products.updateProductInfo');
-            Route::delete('/products/{id}', [ProductController::class, 'destroyProduct'])->name('products.destroyProduct');
+            Route::get('/products', [ProductController::class, 'indexAll'])->name('manageProducts');
+            Route::get('/products/add', [ProductController::class, 'create'])->name('products.add');
+            Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+            Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+            Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+            Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+            Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-            Route::get('/users', [ProfileController::class, 'showAll'])->name('manageUsers');
-            Route::get('/users/add', [ProfileController::class, 'createUser'])->name('users.add');
-            Route::post('/users', [ProfileController::class, 'storeUser'])->name('users.storeUser');
-            Route::get('/users/{id}/edit', [ProfileController::class, 'editUserInfo'])->name('users.editUserInfo');
-            Route::put('/users/{id}', [ProfileController::class, 'updateUserInfo'])->name('users.updateUserInfo');
-            Route::delete('/users/{id}', [ProfileController::class, 'destroyUser'])->name('users.destroyUser');
-            Route::get('/users/{id}/details', [ProfileController::class, 'showUserInfo'])->name('users.showUserInfo');
+            Route::get('/users', [UserController::class, 'index'])->name('manageUsers');
+            Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+            Route::post('/users', [UserController::class, 'store'])->name('users.store');
+            Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+            Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+            Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+            Route::get('/users/{id}/details', [UserController::class, 'show'])->name('users.show');
 
-            Route::get('/orders', [OrdersController::class, 'showAll'])->name('manageOrders');
-            Route::get('/orders/{id}', [OrdersController::class, 'showOrder'])->name('orders.show');
-            Route::get('/orders/{id}/edit', [OrdersController::class, 'editOrder'])->name('orders.edit');
-            Route::put('/orders/{id}', [OrdersController::class, 'updateOrder'])->name('orders.update');
-            Route::delete('/orders/{id}', [OrdersController::class, 'destroyOrder'])->name('orders.destroy');
+            Route::get('/orders', [OrdersController::class, 'indexAll'])->name('manageOrders');
+            Route::get('/orders/{id}', [OrdersController::class, 'show'])->name('orders.show');
+            Route::get('/orders/{id}/edit', [OrdersController::class, 'edit'])->name('orders.edit');
+            Route::put('/orders/{id}', [OrdersController::class, 'update'])->name('orders.update');
+            Route::delete('/orders/{id}', [OrdersController::class, 'destroy'])->name('orders.destroy');
 
-            Route::get('/countries', [CountryController::class, 'showAll'])->name('manageCountries');
-            Route::get('/countries/add', [CountryController::class, 'createCountry'])->name('countries.add');
-            Route::post('/countries', [CountryController::class, 'storeCountry'])->name('countries.store');
-            Route::get('/countries/{id}/edit', [CountryController::class, 'editCountry'])->name('countries.edit');
-            Route::put('/countries/{id}', [CountryController::class, 'updateCountry'])->name('countries.update');
-            Route::delete('/countries/{id}', [CountryController::class, 'destroyCountry'])->name('countries.destroy');
+            Route::get('/countries', [CountryController::class, 'index'])->name('manageCountries');
+            Route::get('/countries/add', [CountryController::class, 'create'])->name('countries.add');
+            Route::post('/countries', [CountryController::class, 'store'])->name('countries.store');
+            Route::get('/countries/{id}/edit', [CountryController::class, 'edit'])->name('countries.edit');
+            Route::put('/countries/{id}', [CountryController::class, 'update'])->name('countries.update');
+            Route::delete('/countries/{id}', [CountryController::class, 'destroy'])->name('countries.destroy');
         });
     });
 });

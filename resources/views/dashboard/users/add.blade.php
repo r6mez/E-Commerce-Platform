@@ -10,7 +10,7 @@
             <div class="p-4 sm:p-8 bg-p-dark shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     <section>
-                        <form method="POST" action="{{ route('users.storeUser') }}" class="mt-6 space-y-6">
+                        <form method="POST" action="{{ route('users.store') }}" class="mt-6 space-y-6">
                             @csrf
                             <div>
                                 <x-input-label for="name" :value="__('Name')" class="text-p-light"/>

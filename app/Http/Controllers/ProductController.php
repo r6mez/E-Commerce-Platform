@@ -13,20 +13,20 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $product->load(['user.country', 'photos']);
-        
+
         $user = Auth::user();
         $userCountry = $user->country;
         $sellerCountry = $product->user->country;
         $price = null;
-        
-        if($user->type == "user" && $userCountry != $sellerCountry){
+
+        if ($user->type == "user" && $userCountry != $sellerCountry) {
             abort(403);
-        }   
+        }
 
         $priceInUsd = $product->price / ((int) $sellerCountry->usd_value);
         $convertedPrice = round($priceInUsd * $userCountry->usd_value, 2);
 
-        if($userCountry == $sellerCountry){
+        if ($userCountry == $sellerCountry) {
             $price = round($product->price * ((100 - $product->discount) / 100), 2);
         }
 
@@ -60,12 +60,12 @@ class ProductController extends Controller
 
         return view('product.index', compact('products', 'categories'));
     }
-    public function showAll(Request $request)
+    public function indexAll(Request $request)
     {
         $products = Product::orderBy('id')->get();
         return view('dashboard.products.manage', compact('products'));
     }
-    public function storeProduct(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -89,7 +89,7 @@ class ProductController extends Controller
 
         return redirect()->route('manageProducts');
     }
-    public function createProduct(): \Illuminate\Contracts\View\View
+    public function create(): \Illuminate\Contracts\View\View
     {
         $categories = Category::all();
         $users = User::all();
@@ -100,7 +100,7 @@ class ProductController extends Controller
     }
 
 
-    public function editProductInfo($id): \Illuminate\Contracts\View\View
+    public function edit($id): \Illuminate\Contracts\View\View
     {
         $categories = Category::all();
         $users = User::all();
@@ -112,7 +112,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function updateProductInfo(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $product = Product::findOrFail($id);
         $request->validate([
@@ -138,17 +138,10 @@ class ProductController extends Controller
         ]);
         return redirect()->route('manageProducts');
     }
-    public function destroyProduct($id)
+    public function destroy($id)
     {
         $product = Product::findOrFail($id);
         $product->delete();
         return redirect()->route('manageProducts');
     }
-
-    public function showProductInfo($id): \Illuminate\Contracts\View\View
-    {
-        $product = Product::findOrFail($id);
-        return view('dashboard.products.show', compact('product'));
-    }
 }
-ini_set('max_execution_time', 60);

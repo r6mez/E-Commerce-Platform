@@ -59,28 +59,28 @@
 
             @auth
                 @if (Auth::user()->type == 'admin' && request()->is('dashboard*'))
-                <nav class="bg-p-dark">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="flex justify-between h-16">
-                            <div class="flex">
-                                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                    <x-nav-link :href="route('manageProducts')" :active="request()->routeIs('manageProducts')">
-                                        {{ __('Manage Products') }}
-                                    </x-nav-link>
-                                    <x-nav-link :href="route('manageUsers')" :active="request()->routeIs('manageUsers')">
-                                        {{ __('Manage Users') }}
-                                    </x-nav-link>
-                                    <x-nav-link :href="route('manageOrders')" :active="request()->routeIs('manageOrders')">
-                                        {{ __('Manage Orders') }}
-                                    </x-nav-link>
-                                    <x-nav-link :href="route('manageCountries')" :active="request()->routeIs('manageCountries')">
-                                        {{ __('Manage Countries') }}
-                                    </x-nav-link>
+                    <nav class="bg-p-dark">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="flex justify-between h-16">
+                                <div class="flex">
+                                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                        <x-nav-link :href="route('manageUsers')" :active="request()->routeIs('manageUsers')">
+                                            {{ __('Manage Users') }}
+                                        </x-nav-link>
+                                        <x-nav-link :href="route('manageCountries')" :active="request()->routeIs('manageCountries')">
+                                            {{ __('Manage Countries') }}
+                                        </x-nav-link>
+                                        <x-nav-link :href="route('manageProducts')" :active="request()->routeIs('manageProducts')">
+                                            {{ __('Manage Products') }}
+                                        </x-nav-link>
+                                        <x-nav-link :href="route('manageOrders')" :active="request()->routeIs('manageOrders')">
+                                            {{ __('Manage Orders') }}
+                                        </x-nav-link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </nav>
+                    </nav>
                 @endif
             @endauth
 

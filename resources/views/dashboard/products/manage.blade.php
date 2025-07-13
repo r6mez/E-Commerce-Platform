@@ -70,15 +70,15 @@
                                         {{$product->quantity}}
                                     </td>
                                     <td class="px-6 py-4 flex gap-2 uppercase">
-                                        <a href="{{ route('products.showProductInfo', $product->id) }}"
+                                        <a href="{{ route('products.show', $product->id) }}"
                                             class="bg-p-medium hover:bg-p-light text-white px-3 py-1 rounded text-xs font-semibold transition duration-150">
                                             Details
                                         </a>
-                                        <a href="{{ route('products.editProductInfo',$product->id)}}"
+                                        <a href="{{ route('products.edit',$product->id)}}"
                                             class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-xs font-semibold transition">
                                             Edit
                                         </a>
-                                        <form action="{{route('products.destroyProduct',$product->id) }}" method="POST">
+                                        <form action="{{route('products.destroy',$product->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
