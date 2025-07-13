@@ -16,18 +16,20 @@
                         Home
                     </x-nav-link>
                     @auth
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
-                            Dashboard
-                        </x-nav-link>
+                        @if (Auth::user()->type == "admin")
+                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
+                                Dashboard
+                            </x-nav-link>
+                        @endif
                         <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
                             Market
                         </x-nav-link>
                         <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
                             Cart
                         </x-nav-link>
-                        {{-- <x-nav-link :href="route('orders')" :active="request()->routeIs('orders')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
+                        <x-nav-link :href="route('order.index')" :active="request()->routeIs('order.index')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
                             Orders
-                        </x-nav-link> --}}
+                        </x-nav-link>
                     @endauth
                 </div>
             </div>

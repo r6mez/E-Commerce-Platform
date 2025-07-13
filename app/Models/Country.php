@@ -9,6 +9,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Country extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'iso_code',
+        'currency_code',
+        'currency_symbol',
+        'usd_value',
+        '_token',
+    ];
+
     public function users() : HasMany {
         return $this->hasMany(User::class);
     }
