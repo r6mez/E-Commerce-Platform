@@ -62,8 +62,8 @@ class ProductController extends Controller
     }
     public function showAll(Request $request)
     {
-        $products = Product::orderBy('id')->take(5)->get();
-        return view('admin.products.manage', compact('products'));
+        $products = Product::orderBy('id')->get();
+        return view('dashboard.products.manage', compact('products'));
     }
     public function storeProduct(Request $request)
     {
@@ -93,7 +93,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $users = User::all();
-        return view('admin.products.add', [
+        return view('dashboard.products.add', [
             'categories' => $categories,
             'users' => $users,
         ]);
@@ -105,7 +105,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $users = User::all();
         $product = Product::findOrFail($id);
-        return view('admin.products.edit', [
+        return view('dashboard.products.edit', [
             'product' => $product,
             'users' => $users,
             'categories' => $categories,
@@ -122,7 +122,7 @@ class ProductController extends Controller
             'price' => 'required|integer',
             'discount' => 'required|integer',
             'details' => 'required|string',
-            'enable' => 'required|in:TRUE,FALSE',
+            'enabled' => 'required|in:TRUE,FALSE',
             'quantity' => 'required|integer',
         ]);
 
@@ -133,7 +133,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'discount' => $request->discount,
             'details' => $request->details,
-            'enable' => $request->enable,
+            'enabled' => $request->enable,
             'quantity' => $request->quantity,
         ]);
         return redirect()->route('manageProducts');
@@ -143,6 +143,12 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->delete();
         return redirect()->route('manageProducts');
+    }
+
+    public function showProductInfo($id): \Illuminate\Contracts\View\View
+    {
+        $product = Product::findOrFail($id);
+        return view('dashboard.products.show', compact('product'));
     }
 }
 ini_set('max_execution_time', 60);

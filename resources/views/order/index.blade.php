@@ -15,9 +15,6 @@
                 <p class="block  py-2 rounded text-white hover:bg-[#2a241a]">Type</p>
                 <p class="text-sm px-4  " style="color:rgb(249, 180, 4);">{{auth()->user()->type}}</p>
             </nav>
-            <div class="px-3 py-8">
-                <button class="text-sm border border-gray-300 px-3 py-1 rounded">Edit Profile</button>
-            </div>
         </div>
         <div class="flex-1 p-8">
             @foreach ($orders as $order)

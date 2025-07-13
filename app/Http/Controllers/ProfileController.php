@@ -24,12 +24,12 @@ class ProfileController extends Controller
     public function showAll(Request $request)
     {
         $users = User::orderBy('id')->get();
-        return view('admin.users.manage', compact('users'));
+        return view('dashboard.users.manage', compact('users'));
     }
     public function showUserInfo($id): View
     {
         $user = User::with('orders')->findOrFail($id);
-        return view('admin.users.orders', compact('user'));
+        return view('dashboard.users.orders', compact('user'));
     }
     public function storeUser(Request $request)
     {
@@ -54,7 +54,7 @@ class ProfileController extends Controller
     public function createUser(): View
     {
         $countries = Country::all();
-        return view('admin.users.add', [
+        return view('dashboard.users.add', [
             'countries' => $countries,
         ]);
     }
@@ -71,7 +71,7 @@ class ProfileController extends Controller
     {
         $countries = Country::all();
         $user = User::findOrFail($id);
-        return view('admin.users.edit', [
+        return view('dashboard.users.edit', [
             'user' => $user,
             'countries' => $countries,
         ]);

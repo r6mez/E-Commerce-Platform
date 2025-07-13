@@ -36,8 +36,6 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/orders', [OrdersController::class, 'index'])->name('ordersIndex');
-    
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
 

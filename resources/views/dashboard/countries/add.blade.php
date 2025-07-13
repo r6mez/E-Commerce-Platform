@@ -1,0 +1,50 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Add Country') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-p-dark overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-p-light">
+                    <form method="POST" action="{{ route('countries.store') }}">
+                        @csrf
+
+                        <div class="mb-4">
+                            <x-input-label for="name" :value="__('Name')" class="text-p-light"/>
+                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full bg-p-medium text-p-light" required />
+                        </div>
+
+                        <div class="mb-4">
+                            <x-input-label for="iso_code" :value="__('ISO Code')" class="text-p-light"/>
+                            <x-text-input id="iso_code" name="iso_code" type="text" class="mt-1 block w-full bg-p-medium text-p-light" required />
+                        </div>
+
+                        <div class="mb-4">
+                            <x-input-label for="currency_code" :value="__('Currency Code')" class="text-p-light"/>
+                            <x-text-input id="currency_code" name="currency_code" type="text" class="mt-1 block w-full bg-p-medium text-p-light" required />
+                        </div>
+
+                        <div class="mb-4">
+                            <x-input-label for="currency_symbol" :value="__('Currency Symbol')" class="text-p-light"/>
+                            <x-text-input id="currency_symbol" name="currency_symbol" type="text" class="mt-1 block w-full bg-p-medium text-p-light" required />
+                        </div>
+
+                        <div class="mb-4">
+                            <x-input-label for="usd_value" :value="__('USD Value')" class="text-p-light"/>
+                            <x-text-input id="usd_value" name="usd_value" type="text" class="mt-1 block w-full bg-p-medium text-p-light" required />
+                        </div>
+
+                        <div class="flex items-center justify-end mt-4">
+                            <x-primary-button>
+                                {{ __('Add Country') }}
+                            </x-primary-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
