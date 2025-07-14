@@ -16,37 +16,41 @@ class OrdersController extends Controller
 
     public function indexAll(Request $request)
     {
-        $orders = Order::with(['user', 'products'])->get();
+        $orders = Order::with(['user', 'product'])->get();
         return view('dashboard.orders.manage', compact('orders'));
     }
 
-    public function show($id)
+    public function show(Order $order)
     {
-        $order = Order::findOrFail($id);
         return view('dashboard.orders.show', compact('order'));
     }
 
-    public function edit($id)
+    public function edit(Order $order)
     {
-        $order = Order::findOrFail($id);
         return view('dashboard.orders.edit', compact('order'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Order $order)
     {
-        $order = Order::findOrFail($id);
-        $request->validate([
-            'amount' => 'required|integer|min:1',
-        ]);
-        $order->amount = $request->input('amount');
-        $order->save();
-        return redirect()->route('manageOrders');
+        try {
+            $request->validate([
+                'amount' => 'required|integer|min:1',
+            ]);
+            $order->amount = $request->input('amount');
+            $order->save();
+            return redirect()->route('manageOrders')->with('success', 'Order updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('manageOrders')->with('error', 'An error occurred while updating the order.');
+        }
     }
 
-    public function destroy($id)
+    public function destroy(Order $order)
     {
-        $order = Order::findOrFail($id);
-        $order->delete();
-        return redirect()->route('manageOrders');
+        try {
+            $order->delete();
+            return redirect()->route('manageOrders')->with('success', 'Order deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('manageOrders')->with('error', 'An error occurred while deleting the order.');
+        }
     }
 }
