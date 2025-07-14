@@ -131,7 +131,7 @@ class ProductController extends Controller
                 'price' => 'required|integer',
                 'discount' => 'required|integer',
                 'details' => 'required|string',
-                'enabled' => 'required|in:TRUE,FALSE',
+                'enable' => 'required|in:TRUE,FALSE',
                 'quantity' => 'required|integer',
                 'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg'
             ]);
@@ -280,6 +280,12 @@ class ProductController extends Controller
         }
     }
     public function destroyPhoto(Product $product, Photo $photo)
+    {
+        Storage::disk('public')->delete($photo->photo_url);
+        $photo->delete();
+        return redirect()->route('products.edit', [$product])->with('success', 'Photo removed successfully.');
+    }
+    public function destroyPhotoForSeller(Product $product, Photo $photo)
     {
         Storage::disk('public')->delete($photo->photo_url);
         $photo->delete();

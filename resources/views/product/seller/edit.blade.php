@@ -39,7 +39,7 @@
             <div class="p-4 sm:p-8 bg-p-dark shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     <section>
-                        <form method="POST" action="{{ route('seller.products.update', $product->id) }}"
+                        <form method="POST" action="{{ route('seller.products.update') }}"
                             class="mt-6 space-y-6" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
