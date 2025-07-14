@@ -39,7 +39,7 @@
             <div class="p-4 sm:p-8 bg-p-dark shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     <section>
-                        <form method="POST" action="{{ route('products.update', $product) }}"
+                        <form method="POST" action="{{ route('seller.products.update') }}"
                             class="mt-6 space-y-6" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -110,22 +110,6 @@
                                     :value="old('quantity', $product->quantity)" required />
                                 <x-input-error class="mt-2" :messages="$errors->get('quantity')" />
                             </div>
-                            
-                            <div> 
-                                <x-input-label for="enable" :value="Enable" class="text-p-light"/>
-                                <x-select-input id="enable" name="enable" class="mt-1 block w-full rounded-md text-p-light shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 bg-p-medium">
-                                    <option value="TRUE" {{ old('enable', $product->enable) == 'TRUE' ? 'selected' : '' }}>
-                                        TRUE
-                                    </option>b     
-                                    <option value="FALSE" {{ old('enable', $product->enable) == 'FALSE' ? 'selected' : '' }}>
-                                        FALSE
-                                    </option>
-                                </x-select-input>
-
-                                <x-input-error class="mt-2" :messages="$errors->get('country_id')" />
-                            </div>
-
-
                             <div>
                                 <x-input-label for="photos" :value="__('Product Photos')" class="text-p-light" />
                                 <input id="photos" name="photos[]" type="file" class="mt-1 block w-full text-p-light"
@@ -143,7 +127,7 @@
                             <div class="photo-item relative inline-block m-2">
                                 <img src="{{ $photo->photo_url }}" alt="Photo {{ $loop->iteration }}"
                                     class="w-32 h-32 object-cover rounded shadow" />
-                                <form method="post" action="{{ route('products.photos.destroy', [$product, $photo]) }}">
+                                <form method="post" action="{{ route('seller.products.photos.destroy', [$product, $photo]) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button

@@ -21,6 +21,11 @@
                                 Dashboard
                             </x-nav-link>
                         @endif
+                        @if (Auth::user()->type == "seller" || Auth::user()->type == "admin")
+                            <x-nav-link :href="route('seller.products.index')" :active="request()->routeIs('seller.products.index')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
+                                My Products
+                            </x-nav-link>
+                        @endif
                         <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')" class="text-p-light hover:text-p-light/80" active-class="border-b-2 border-p-light">
                             Market
                         </x-nav-link>
@@ -101,11 +106,24 @@
                 Home
             </x-responsive-nav-link>
             @auth
+                @if (Auth::user()->type == "admin")
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-p-light hover:text-p-light/80 hover:bg-p-medium">
                     Dashboard
                 </x-responsive-nav-link>
+                @endif
+                @if (Auth::user()->type == "seller" || Auth::user()->type == "admin")
+                <x-responsive-nav-link :href="route('seller.products.index')" :active="request()->routeIs('seller.products.index')" class="text-p-light hover:text-p-light/80 hover:bg-p-medium">
+                    My Products
+                </x-responsive-nav-link>
+                @endif
                 <x-responsive-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')" class="text-p-light hover:text-p-light/80 hover:bg-p-medium">
                     Market
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')" class="text-p-light hover:text-p-light/80 hover:bg-p-medium">
+                    Cart
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('order.index')" :active="request()->routeIs('order.index')" class="text-p-light hover:text-p-light/80 hover:bg-p-medium">
+                    Orders
                 </x-responsive-nav-link>
             @endauth
         </div>
@@ -131,7 +149,6 @@
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        
                         <x-responsive-nav-link :href="route('logout')"
                         onclick="event.preventDefault(); this.closest('form').submit();"
                                 class="text-p-light hover:text-p-light/80 hover:bg-p-medium">

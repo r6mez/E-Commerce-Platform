@@ -13,8 +13,8 @@ This is a simple e-commerce platform built with the Laravel framework.
 - [X] Order History Page
 - [X] Cart Page
 - [X] Admin Dashboard (CRUD)
+- [X] View / Add Product Page (as a seller)
 - [ ] Admin Statistics 
-- [ ] View / Add Product Page (as a seller)
 - [ ] CSV 
 - [ ] Email 
 - [ ] QR code 

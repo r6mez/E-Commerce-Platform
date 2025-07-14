@@ -84,6 +84,27 @@
                 @endif
             @endauth
 
+            @auth
+                @if (Auth::user()->type == 'seller')
+                    <nav class="bg-p-dark">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="flex justify-between h-16">
+                                <div class="flex">
+                                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                        <x-nav-link :href="route('seller.products.index')" :active="request()->routeIs('seller.products.index')">
+                                            {{ __('My Products') }}
+                                        </x-nav-link>
+                                        <x-nav-link :href="route('seller.products.create')" :active="request()->routeIs('seller.products.create')">
+                                            {{ __('Add Product') }}
+                                        </x-nav-link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                @endif
+            @endauth
+
             <!-- Page Content -->
             <main>
                 {{ $slot }}
