@@ -14,7 +14,6 @@ This is a simple e-commerce platform built with the Laravel framework.
 - [X] Cart Page
 - [X] Admin Dashboard (CRUD)
 - [X] View / Add Product Page (as a seller)
-    - [ ] Add the ability to remove photos.   
 - [ ] Admin Statistics 
 - [ ] CSV 
 - [ ] Email 

@@ -68,6 +68,7 @@ Route::middleware(['auth'])->group(function () {
     });
     
     Route::middleware(IsSeller::class)->name('seller.')->group(function () {
+        Route::delete('/seller/products/{product}/photo/{photo}', [ProductController::class, 'destroyPhoto'])->name('products.photos.destroy');
         Route::get('/seller/products', [ProductController::class, 'indexForSeller'])->name('products.index');
         Route::get('/seller/products/create', [ProductController::class, 'createForSeller'])->name('products.create');
         Route::post('/seller/products', [ProductController::class, 'storeForSeller'])->name('products.store');

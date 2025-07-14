@@ -8,6 +8,7 @@ use App\Models\Photo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -268,13 +269,20 @@ class ProductController extends Controller
             if ($request->hasFile('photos')) {
                 foreach ($request->file('photos') as $photo) {
                     $path = $photo->store('products', 'public');
-                    $product->photos()->create(['photo' => $path]);
+                    $product->photos()->create(['photo_url' => $path]);
                 }
             }
+
             return redirect()->route('seller.products.index')->with('success', 'Product updated successfully.');
         } catch (\Exception $e) {
             dd($e);
             return redirect()->route('seller.products.index')->with('error', 'An error occurred while updating the product.');
         }
+    }
+    public function destroyPhoto(Product $product, Photo $photo)
+    {
+        Storage::disk('public')->delete($photo->photo_url);
+        $photo->delete();
+        return redirect()->route('seller.products.edit', [$product])->with('success', 'Photo removed successfully.');
     }
 }
