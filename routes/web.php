@@ -10,6 +10,7 @@ use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\EnsureIsAdmin;
+use App\Http\Middleware\IsSeller;
 
 Route::get('/', [HomeController::class, 'index'])->name('/');
 
@@ -64,6 +65,14 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/orders/{order}', [OrdersController::class, 'update'])->name('orders.update');
             Route::delete('/orders/{order}', [OrdersController::class, 'destroy'])->name('orders.destroy');
         });
+    });
+    
+    Route::middleware(IsSeller::class)->name('seller.')->group(function () {
+        Route::get('/seller/products', [ProductController::class, 'indexForSeller'])->name('products.index');
+        Route::get('/seller/products/create', [ProductController::class, 'createForSeller'])->name('products.create');
+        Route::post('/seller/products', [ProductController::class, 'storeForSeller'])->name('products.store');
+        Route::get('/seller/products/{product}/edit', [ProductController::class, 'editForSeller'])->name('products.edit');
+        Route::put('/products/{product}', [ProductController::class, 'updateForSeller'])->name('products.update');
     });
 });
 

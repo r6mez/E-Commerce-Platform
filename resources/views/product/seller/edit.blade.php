@@ -39,7 +39,7 @@
             <div class="p-4 sm:p-8 bg-p-dark shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     <section>
-                        <form method="POST" action="{{ route('products.update', $product->id) }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('seller.products.update', $product->id) }}" class="mt-6 space-y-6" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div>
@@ -95,21 +95,6 @@
                                     class="mt-1 block w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 text-p-light bg-p-medium"
                                      required>{{ old('details', $product->details) }}</textarea>
                                 <x-input-error class="mt-2" :messages="$errors->get('details')" />
-                            </div>
-
-                            <div>
-                                <x-input-label for="enable" :value="__('Enable')" class="text-p-light"/>
-                                <x-select-input id="enable" name="enable" class="mt-1 block w-full rounded-md text-p-light shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 bg-p-medium">
-
-                                    <option value="TRUE" {{ old('enable', $product->enable) == 'TRUE' ? 'selected' : '' }}>
-                                        TRUE
-                                    </option>
-                                    <option value="FALSE" {{ old('enable', $product->enable) == 'FALSE' ? 'selected' : '' }}>
-                                        FALSE
-                                    </option>
-                                </x-select-input>
-
-                                <x-input-error class="mt-2" :messages="$errors->get('country_id')" />
                             </div>
 
                             <div>
