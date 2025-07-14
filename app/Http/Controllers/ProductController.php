@@ -12,7 +12,9 @@ class ProductController extends Controller
 {
     public function show(Product $product)
     {
-        $product->load(['user.country', 'photos']);
+        $product->load(['user', 'photos']);
+
+        // dd($product);
 
         $user = Auth::user();
         $userCountry = $user->country;
@@ -60,51 +62,56 @@ class ProductController extends Controller
 
         return view('product.index', compact('products', 'categories'));
     }
+
     public function indexAll(Request $request)
     {
         $products = Product::orderBy('id')->get();
         return view('dashboard.products.manage', compact('products'));
     }
+
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'user_id' => 'required|exists:users,id|unique:products,user_id',
-            'category_id' => 'required|exists:categories,id',
-            'price' => 'required|integer',
-            'discount' => 'required|integer',
-            'details' => 'required|string',
-            'quantity' => 'required|integer',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'user_id' => 'required|exists:users,id|unique:products,user_id',
+                'category_id' => 'required|exists:categories,id',
+                'price' => 'required|integer',
+                'discount' => 'required|integer',
+                'details' => 'required|string',
+                'quantity' => 'required|integer',
+            ]);
 
-        Product::create([
-            'name' => $request->name,
-            'user_id' => $request->user_id,
-            'category_id' => $request->category_id,
-            'price' => $request->price,
-            'discount' => $request->discount,
-            'details' => $request->details,
-            'quantity' => $request->quantity,
-        ]);
+            Product::create([
+                'name' => $request->name,
+                'user_id' => $request->user_id,
+                'category_id' => $request->category_id,
+                'price' => $request->price,
+                'discount' => $request->discount,
+                'details' => $request->details,
+                'quantity' => $request->quantity,
+            ]);
 
-        return redirect()->route('manageProducts');
+            return redirect()->route('manageProducts')->with('success', 'Product created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('manageProducts')->with('error', 'An error occurred while creating the product.');
+        }
     }
-    public function create(): \Illuminate\Contracts\View\View
+    public function create()
     {
         $categories = Category::all();
         $users = User::all();
-        return view('dashboard.products.add', [
+        return view('dashboard.products.create', [
             'categories' => $categories,
             'users' => $users,
         ]);
     }
 
 
-    public function edit($id): \Illuminate\Contracts\View\View
+    public function edit(Product $product)
     {
         $categories = Category::all();
         $users = User::all();
-        $product = Product::findOrFail($id);
         return view('dashboard.products.edit', [
             'product' => $product,
             'users' => $users,
@@ -112,36 +119,42 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        $product = Product::findOrFail($id);
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'user_id' => 'required|exists:users,id',
-            'category_id' => 'required|exists:categories,id',
-            'price' => 'required|integer',
-            'discount' => 'required|integer',
-            'details' => 'required|string',
-            'enabled' => 'required|in:TRUE,FALSE',
-            'quantity' => 'required|integer',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'user_id' => 'required|exists:users,id',
+                'category_id' => 'required|exists:categories,id',
+                'price' => 'required|integer',
+                'discount' => 'required|integer',
+                'details' => 'required|string',
+                'enabled' => 'required|in:TRUE,FALSE',
+                'quantity' => 'required|integer',
+            ]);
 
-        $product->update([
-            'name' => $request->name,
-            'user_id' => $request->user_id,
-            'category_id' => $request->category_id,
-            'price' => $request->price,
-            'discount' => $request->discount,
-            'details' => $request->details,
-            'enabled' => $request->enable,
-            'quantity' => $request->quantity,
-        ]);
-        return redirect()->route('manageProducts');
+            $product->update([
+                'name' => $request->name,
+                'user_id' => $request->user_id,
+                'category_id' => $request->category_id,
+                'price' => $request->price,
+                'discount' => $request->discount,
+                'details' => $request->details,
+                'enabled' => $request->enable,
+                'quantity' => $request->quantity,
+            ]);
+            return redirect()->route('manageProducts')->with('success', 'Product updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('manageProducts')->with('error', 'An error occurred while updating the product.');
+        }
     }
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
-        return redirect()->route('manageProducts');
+        try {
+            $product->delete();
+            return redirect()->route('manageProducts')->with('success', 'Product deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('manageProducts')->with('error', 'An error occurred while deleting the product.');
+        }
     }
 }
