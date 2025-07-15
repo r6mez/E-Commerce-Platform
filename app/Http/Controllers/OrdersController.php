@@ -38,9 +38,9 @@ class OrdersController extends Controller
             ]);
             $order->amount = $request->input('amount');
             $order->save();
-            return redirect()->route('manageOrders')->with('success', 'Order updated successfully.');
+            return redirect()->route('orders.index')->with('success', 'Order updated successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('manageOrders')->with('error', 'An error occurred while updating the order.');
+            return redirect()->route('orders.index')->with('error', 'An error occurred while updating the order.');
         }
     }
 
@@ -48,9 +48,9 @@ class OrdersController extends Controller
     {
         try {
             $order->delete();
-            return redirect()->route('manageOrders')->with('success', 'Order deleted successfully.');
+            return redirect()->route('orders.index')->with('success', 'Order deleted successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('manageOrders')->with('error', 'An error occurred while deleting the order.');
+            return redirect()->route('orders.index')->with('error', 'An error occurred while deleting the order.');
         }
     }
 }

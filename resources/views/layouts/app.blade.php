@@ -67,16 +67,16 @@
                                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                                             {{ __('Overview') }}
                                         </x-nav-link>
-                                        <x-nav-link :href="route('manageUsers')" :active="request()->routeIs('manageUsers')">
+                                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                                             {{ __('Manage Users') }}
                                         </x-nav-link>
-                                        <x-nav-link :href="route('manageCountries')" :active="request()->routeIs('manageCountries')">
+                                        <x-nav-link :href="route('countries.index')" :active="request()->routeIs('countries.index')">
                                             {{ __('Manage Countries') }}
                                         </x-nav-link>
-                                        <x-nav-link :href="route('manageProducts')" :active="request()->routeIs('manageProducts')">
+                                        <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
                                             {{ __('Manage Products') }}
                                         </x-nav-link>
-                                        <x-nav-link :href="route('manageOrders')" :active="request()->routeIs('manageOrders')">
+                                        <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')">
                                             {{ __('Manage Orders') }}
                                         </x-nav-link>
                                     </div>

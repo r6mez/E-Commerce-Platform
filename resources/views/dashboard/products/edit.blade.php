@@ -112,7 +112,7 @@
                             </div>
                             
                             <div> 
-                                <x-input-label for="enable" :value="Enable" class="text-p-light"/>
+                                <x-input-label for="enable" value="Enable" class="text-p-light"/>
                                 <x-select-input id="enable" name="enable" class="mt-1 block w-full rounded-md text-p-light shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 bg-p-medium">
                                     <option value="TRUE" {{ old('enable', $product->enable) == 'TRUE' ? 'selected' : '' }}>
                                         TRUE

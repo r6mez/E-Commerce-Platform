@@ -45,9 +45,9 @@ class UserController extends Controller
                 'password' => bcrypt($request->password),
             ]);
 
-            return redirect()->route('manageUsers')->with('success', 'User created successfully.');
+            return redirect()->route('users.index')->with('success', 'User created successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('manageUsers')->with('error', 'An error occurred while creating the user.');
+            return redirect()->route('users.index')->with('error', 'An error occurred while creating the user.');
         }
     }
 
@@ -79,9 +79,9 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            return redirect()->route('manageUsers')->with('success', 'User updated successfully.');
+            return redirect()->route('users.index')->with('success', 'User updated successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('manageUsers')->with('error', 'An error occurred while updating the user.');
+            return redirect()->route('users.index')->with('error', 'An error occurred while updating the user.');
         }
     }
 
@@ -89,9 +89,9 @@ class UserController extends Controller
     {
         try {
             $user->delete();
-            return redirect()->route('manageUsers')->with('success', 'User deleted successfully.');
+            return redirect()->route('users.index')->with('success', 'User deleted successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('manageUsers')->with('error', 'An error occurred while deleting the user.');
+            return redirect()->route('users.index')->with('error', 'An error occurred while deleting the user.');
         }
     }
 
