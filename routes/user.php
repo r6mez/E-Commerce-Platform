@@ -15,8 +15,8 @@ Route::middleware(['auth'])->group(function () {
     });
     
     Route::prefix('products')->group(function () { // in market
-        Route::get('/{product}', [ProductController::class, 'show'])->name('product.show');
         Route::get('', [ProductController::class, 'index'])->name('product.index');
+        Route::get('/{product}', [ProductController::class, 'show'])->name('product.show');
     });
 
     Route::prefix('cart')->group(function () {

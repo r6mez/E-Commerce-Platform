@@ -10,8 +10,7 @@ class HomeController extends Controller
 {
     public function index(){
         $products = Product::take(6)->get(); 
-        $categories = Category::all(); 
+        $categories = Category::take(11)->get(); 
         return view('home.index', compact('products', 'categories'));
-
     }
 }
