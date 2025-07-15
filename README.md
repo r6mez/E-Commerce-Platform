@@ -17,7 +17,7 @@ This is a simple e-commerce platform built with the Laravel framework.
 - [X] CSV 
 - [X] Email 
 - [X] QR code 
-- [ ] Admin Statistics 
+- [X] Admin Statistics 
 
 ## Project Setup
 

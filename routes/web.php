@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\EnsureIsAdmin;
@@ -33,7 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders', [OrdersController::class, 'index'])->name('order.index');
 
     Route::middleware(EnsureIsAdmin::class)->group(function () {
-        Route::get('/dashboard', function () { return view('dashboard.dashboard'); })->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         
         Route::prefix('dashboard')->group(function () {
             Route::get('/users', [UserController::class, 'index'])->name('manageUsers');
