@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\Category;
 use App\Models\Photo;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +23,7 @@ class ProductController extends Controller
         $sellerCountry = $product->user->country;
         $price = null;
 
-        if ($user->type == "user" && $userCountry != $sellerCountry) {
+        if ($user->type == 'user' && $userCountry != $sellerCountry) {
             abort(403);
         }
 
@@ -56,7 +56,7 @@ class ProductController extends Controller
         }
 
         if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%');
         }
 
         $products = $query->with(['user.country'])->paginate(12);
@@ -68,6 +68,7 @@ class ProductController extends Controller
     public function indexAll(Request $request)
     {
         $products = Product::orderBy('id')->get();
+
         return view('dashboard.products.manage', compact('products'));
     }
 
@@ -80,7 +81,7 @@ class ProductController extends Controller
             'discount' => 'required|integer',
             'details' => 'required|string',
             'quantity' => 'required|integer',
-            'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+            'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         $product = Product::create([
@@ -102,21 +103,23 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
+
     public function create()
     {
         $categories = Category::all();
         $users = User::all();
+
         return view('dashboard.products.create', [
             'categories' => $categories,
             'users' => $users,
         ]);
     }
 
-
     public function edit(Product $product)
     {
         $categories = Category::all();
         $users = User::all();
+
         return view('dashboard.products.edit', [
             'product' => $product,
             'users' => $users,
@@ -136,7 +139,7 @@ class ProductController extends Controller
             'details' => 'required|string',
             'enable' => 'required|in:TRUE,FALSE',
             'quantity' => 'required|integer',
-            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg'
+            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         $product->update([
@@ -159,10 +162,12 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
+
     public function destroy(Product $product)
     {
         try {
             $product->delete();
+
             return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
         } catch (\Exception $e) {
             return redirect()->route('products.index')->with('error', 'An error occurred while deleting the product.');
@@ -173,6 +178,7 @@ class ProductController extends Controller
     {
         Storage::disk('public')->delete($photo->photo_url);
         $photo->delete();
+
         return redirect()->route('products.edit', [$product])->with('success', 'Photo removed successfully.');
     }
 }

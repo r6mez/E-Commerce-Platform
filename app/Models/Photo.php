@@ -18,12 +18,12 @@ class Photo extends Model
         if (str_contains($path, 'http')) {
             return $path;
         }
+
         return asset("storage/{$path}");
     }
-
 
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
-};
+}

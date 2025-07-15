@@ -2,24 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\File;
 use App\Mail\ProductsExportMail;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
 
 class SellerController extends Controller
 {
     public function index()
     {
         $sellers = User::whereIn('type', ['seller', 'admin'])->get();
+
         return view('seller.index', ['sellers' => $sellers]);
     }
-
 
     public function exportCSV()
     {
@@ -78,23 +77,21 @@ class SellerController extends Controller
 
         fclose($file);
 
-
-        $writer = new PngWriter();
+        $writer = new PngWriter;
 
         $qrFileName = 'qr_code.png';
         $qrPath = storage_path('app/qr_code.png');
         $qrCode = new QrCode(
-            data: 'https://i.pinimg.com/736x/91/d3/11/91d3118151a1a9ed4478dd0bfa7a5306.jpg',
+            data: config('app.url'),
         );
         $result = $writer->write($qrCode);
         $result->saveToFile($qrPath);
-        
 
         Mail::to($reciver->email)->send(new ProductsExportMail($filename, $qrFileName, $reciver));
 
         File::delete($path);
         File::delete($qrPath);
 
-        return back()->with('success', 'CSV exported and emailed successfully.');;
+        return back()->with('success', 'CSV exported and emailed successfully.');
     }
 }

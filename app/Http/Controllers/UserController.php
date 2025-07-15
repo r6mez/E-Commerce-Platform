@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Illuminate\Support\Facades\Hash;
-
 use App\Models\Country;
 use App\Models\User;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
     public function index(Request $request)
     {
         $users = User::orderBy('id')->get();
+
         return view('dashboard.users.manage', compact('users'));
     }
 
     public function create()
     {
         $countries = Country::all();
+
         return view('dashboard.users.create', [
             'countries' => $countries,
         ]);
@@ -54,6 +54,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $countries = Country::all();
+
         return view('dashboard.users.edit', [
             'user' => $user,
             'countries' => $countries,
@@ -89,6 +90,7 @@ class UserController extends Controller
     {
         try {
             $user->delete();
+
             return redirect()->route('users.index')->with('success', 'User deleted successfully.');
         } catch (\Exception $e) {
             return redirect()->route('users.index')->with('error', 'An error occurred while deleting the user.');

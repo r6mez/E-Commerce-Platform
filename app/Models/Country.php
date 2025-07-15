@@ -24,13 +24,13 @@ class Country extends Model
     public function getFlagEmojiAttribute()
     {
         return collect(explode('-', $this->iso_code))
-            ->map(fn ($char) => 
-                mb_chr(ord($char) % 32 + 0x1F1E5)
+            ->map(fn ($char) => mb_chr(ord($char) % 32 + 0x1F1E5)
             )
             ->join('');
     }
 
-    public function users() : HasMany {
+    public function users(): HasMany
+    {
         return $this->hasMany(User::class);
     }
 }

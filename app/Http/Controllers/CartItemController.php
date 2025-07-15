@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\CartItem;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CartItemController extends Controller
 {
     use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
@@ -31,6 +32,7 @@ class CartItemController extends Controller
                 $convertedSubtotal = round($convertedPrice * $item->quantity, 2);
                 $item->converted_price = $convertedPrice;
                 $item->converted_subtotal = $convertedSubtotal;
+
                 return $item;
             });
 
@@ -50,7 +52,7 @@ class CartItemController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validated = $request->validate([
             'user_id' => 'required|exists:users,id',
             'product_id' => 'required|exists:products,id',
@@ -104,10 +106,11 @@ class CartItemController extends Controller
             abort(403, 'Unauthorized action.');
         }
         $validated = $request->validate([
-            'quantity' => 'required|integer|min:1|max:' . $cartItem->product->quantity,
+            'quantity' => 'required|integer|min:1|max:'.$cartItem->product->quantity,
         ]);
         $cartItem->quantity = $validated['quantity'];
         $cartItem->save();
+
         return redirect()->back()->with('success', 'Cart item updated successfully.');
     }
 
@@ -120,6 +123,7 @@ class CartItemController extends Controller
             abort(403, 'Unauthorized action.');
         }
         $cartItem->delete();
+
         return redirect()->back()->with('success', 'Item removed from cart.');
     }
 }

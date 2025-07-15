@@ -4,17 +4,21 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
 
 class ProductsExportMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $filePath, $qrPath, $reciver;
+    public $filePath;
+
+    public $qrPath;
+
+    public $reciver;
 
     public function __construct($filePath, $qrPath, $reciver)
     {
@@ -37,6 +41,7 @@ class ProductsExportMail extends Mailable
             with: [
                 'reciverName' => $this->reciver->name,
                 'senderName' => Auth::user()->name,
+                'qrPath' => $this->qrPath,
             ]
         );
     }
@@ -47,10 +52,6 @@ class ProductsExportMail extends Mailable
             Attachment::fromPath(storage_path("app/{$this->filePath}"))
                 ->as('products.csv')
                 ->withMime('text/csv'),
-
-            Attachment::fromPath(storage_path("app/{$this->qrPath}"))
-                ->as('qr_code.png')
-                ->withMime('image/png'),
         ];
     }
 }

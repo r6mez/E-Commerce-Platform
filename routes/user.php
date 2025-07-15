@@ -1,10 +1,11 @@
 <?php
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProductController;
+
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('profile')->group(function () {
@@ -13,7 +14,7 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
-    
+
     Route::prefix('products')->group(function () { // in market
         Route::get('', [ProductController::class, 'index'])->name('product.index');
         Route::get('/{product}', [ProductController::class, 'show'])->name('product.show');
