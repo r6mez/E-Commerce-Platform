@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\SellerController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\EnsureIsAdmin;
 use App\Http\Middleware\IsSeller;
@@ -27,7 +28,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cart', [CartItemController::class, 'index'])->name('cart.index');
     Route::delete('/cart/{cartItem}', [CartItemController::class, 'destroy'])->name('cart.destroy');
     Route::patch('/cart/{cartItem}', [CartItemController::class, 'update'])->name('cart.update');
-
     Route::post('/cart/checkout', [CheckoutController::class, 'checkout'])->name('cart.checkout');
 
     Route::get('/orders', [OrdersController::class, 'index'])->name('order.index');
@@ -74,7 +74,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/seller/products/create', [ProductController::class, 'createForSeller'])->name('products.create');
         Route::post('/seller/products', [ProductController::class, 'storeForSeller'])->name('products.store');
         Route::get('/seller/products/{product}/edit', [ProductController::class, 'editForSeller'])->name('products.edit');
-        Route::put('/products/{product}', [ProductController::class, 'updateForSeller'])->name('products.update');
+        Route::put('/seller/products/{product}', [ProductController::class, 'updateForSeller'])->name('products.update');
+        Route::get('/seller/products/export', [SellerController::class, 'exportCSV'])->name('products.export');
+        Route::get('/seller', [SellerController::class, 'index'])->name('index');
+        Route::get('/seller/emailCSV/{reciver}', [SellerController::class, 'emailCSV'])->name('products.email');
     });
 });
 

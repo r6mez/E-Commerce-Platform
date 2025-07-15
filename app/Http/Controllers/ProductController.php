@@ -279,12 +279,14 @@ class ProductController extends Controller
             return redirect()->route('seller.products.index')->with('error', 'An error occurred while updating the product.');
         }
     }
+
     public function destroyPhoto(Product $product, Photo $photo)
     {
         Storage::disk('public')->delete($photo->photo_url);
         $photo->delete();
         return redirect()->route('products.edit', [$product])->with('success', 'Photo removed successfully.');
     }
+
     public function destroyPhotoForSeller(Product $product, Photo $photo)
     {
         Storage::disk('public')->delete($photo->photo_url);

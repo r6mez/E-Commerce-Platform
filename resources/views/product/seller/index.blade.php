@@ -4,9 +4,17 @@
             <div class="p-6 bg-p-dark/80 rounded-lg">
                 <div class="flex justify-between items-center mb-6">
                     <h1 class="text-2xl font-semibold text-p-light">My Products</h1>
-                    <a href="{{ route('seller.products.create') }}" class="inline-flex items-center px-4 py-2 bg-p-light border-transparent rounded-md font-semibold text-xs text-p-dark uppercase tracking-widest hover:bg-p-light/70 active:bg-p-light/80 disabled:opacity-25 transition ease-in-out duration-150">
-                        Add Product
-                    </a>
+                    <div class="gap-2">
+                        <a href="{{ route('seller.products.export') }}" class="inline-flex items-center px-4 py-2 bg-green-500 border-transparent rounded-md font-semibold text-xs text-p-dark uppercase tracking-widest hover:bg-green-500/70 active:bg-green-500/80 disabled:opacity-25 transition ease-in-out duration-150">
+                            Export CSV
+                        </a>
+                        <a href="{{ route('seller.index') }}" class="inline-flex items-center px-4 py-2 bg-red-500 border-transparent rounded-md font-semibold text-xs text-p-dark uppercase tracking-widest hover:bg-red-500/70 active:bg-red-500/80 disabled:opacity-25 transition ease-in-out duration-150">
+                            Email CSV
+                        </a>
+                        <a href="{{ route('seller.products.create') }}" class="inline-flex items-center px-4 py-2 bg-p-light border-transparent rounded-md font-semibold text-xs text-p-dark uppercase tracking-widest hover:bg-p-light/70 active:bg-p-light/80 disabled:opacity-25 transition ease-in-out duration-150">
+                            Add Product
+                        </a>
+                    </div>
                 </div>
 
                 <form action="{{ route('seller.products.index') }}" method="GET">
