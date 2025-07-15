@@ -11,12 +11,14 @@ class OrdersController extends Controller
     public function index()
     {
         $orders = Order::where('user_id', Auth::id())->get();
+
         return view('order.index', compact('orders'));
     }
 
     public function indexAll(Request $request)
     {
         $orders = Order::with(['user', 'product'])->get();
+
         return view('dashboard.orders.manage', compact('orders'));
     }
 
@@ -38,6 +40,7 @@ class OrdersController extends Controller
             ]);
             $order->amount = $request->input('amount');
             $order->save();
+
             return redirect()->route('orders.index')->with('success', 'Order updated successfully.');
         } catch (\Exception $e) {
             return redirect()->route('orders.index')->with('error', 'An error occurred while updating the order.');
@@ -48,6 +51,7 @@ class OrdersController extends Controller
     {
         try {
             $order->delete();
+
             return redirect()->route('orders.index')->with('success', 'Order deleted successfully.');
         } catch (\Exception $e) {
             return redirect()->route('orders.index')->with('error', 'An error occurred while deleting the order.');

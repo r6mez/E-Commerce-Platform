@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\SellerController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerProductController;
+use Illuminate\Support\Facades\Route;
 
-Route::middleware(['seller'])->prefix("seller")->name('seller.')->group(function () {
+Route::middleware(['seller'])->prefix('seller')->name('seller.')->group(function () {
     Route::get('', [SellerController::class, 'index'])->name('index');
     Route::get('/emailCSV/{reciver}', [SellerController::class, 'emailCSV'])->name('products.email');
 

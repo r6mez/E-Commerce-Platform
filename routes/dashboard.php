@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -21,7 +21,6 @@ Route::middleware(['admin'])->group(function () {
             Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
         });
 
-
         Route::prefix('countries')->group(function () {
             Route::get('', [CountryController::class, 'index'])->name('countries.index');
             Route::get('/add', [CountryController::class, 'create'])->name('countries.add');
@@ -30,7 +29,6 @@ Route::middleware(['admin'])->group(function () {
             Route::put('/{country}', [CountryController::class, 'update'])->name('countries.update');
             Route::delete('/{country}', [CountryController::class, 'destroy'])->name('countries.destroy');
         });
-
 
         Route::prefix('products')->group(function () {
             Route::delete('/{product}/photo/{photo}', [ProductController::class, 'destroyPhoto'])->name('products.photos.destroy');
@@ -42,7 +40,6 @@ Route::middleware(['admin'])->group(function () {
             Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
             Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
         });
-
 
         Route::prefix('orders')->group(function () {
             Route::get('', [OrdersController::class, 'indexAll'])->name('orders.index');

@@ -24,6 +24,7 @@ class CheckoutController extends Controller
             ]);
             $item->delete();
         }
+
         return redirect()->route('cart.index')->with('success', 'Checkout successful!');
     }
 }

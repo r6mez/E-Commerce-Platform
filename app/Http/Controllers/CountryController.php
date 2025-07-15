@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Country;
+use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
     public function index(Request $request)
     {
         $countries = Country::all();
+
         return view('dashboard.countries.manage', compact('countries'));
     }
 
@@ -77,6 +78,7 @@ class CountryController extends Controller
     {
         try {
             $country->delete();
+
             return redirect()->route('countries.index')->with('success', 'Country deleted successfully.');
         } catch (\Exception $e) {
             return redirect()->route('countries.index')->with('error', 'An error occurred while deleting the country.');

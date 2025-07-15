@@ -19,6 +19,7 @@ class AuthenticatedSessionController extends Controller
         if (Auth::check()) {
             return redirect()->route('/');
         }
+
         return view('auth.login');
     }
 

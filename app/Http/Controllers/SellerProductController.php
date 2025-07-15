@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Photo;
 use App\Models\Product;
 use App\Models\User;
-use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +22,7 @@ class SellerProductController extends Controller
         }
 
         if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%');
         }
 
         $products = $query->paginate(12);
@@ -34,6 +34,7 @@ class SellerProductController extends Controller
     public function create()
     {
         $categories = Category::all();
+
         return view('product.seller.create', [
             'categories' => $categories,
         ]);
@@ -48,7 +49,7 @@ class SellerProductController extends Controller
             'discount' => 'required|integer',
             'details' => 'required|string',
             'quantity' => 'required|integer',
-            'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+            'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         $product = Product::create([
@@ -75,6 +76,7 @@ class SellerProductController extends Controller
     {
         $categories = Category::all();
         $users = User::all();
+
         return view('product.seller.edit', [
             'product' => $product,
             'users' => $users,
@@ -92,7 +94,7 @@ class SellerProductController extends Controller
             'discount' => 'required|integer',
             'details' => 'required|string',
             'quantity' => 'required|integer',
-            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg'
+            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         $product->update([
@@ -119,6 +121,7 @@ class SellerProductController extends Controller
     {
         Storage::disk('public')->delete($photo->photo_url);
         $photo->delete();
+
         return redirect()->route('seller.products.edit', [$product])->with('success', 'Photo removed successfully.');
     }
 }
