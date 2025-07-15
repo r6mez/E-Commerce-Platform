@@ -15,10 +15,15 @@ class Photo extends Model
     public function getPhotoUrlAttribute()
     {
         $path = $this->attributes['photo_url'];
+        if (str_contains($path, 'http')) {
+            return $path;
+        }
         return asset("storage/{$path}");
     }
 
-    public function product() : BelongsTo {
+
+    public function product(): BelongsTo
+    {
         return $this->belongsTo(Product::class);
     }
 };
