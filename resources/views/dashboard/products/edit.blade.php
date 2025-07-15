@@ -37,8 +37,7 @@
             </div>
             @endif
             <div class="p-4 sm:p-8 bg-p-dark shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    <section>
+                
                         <form method="POST" action="{{ route('products.update', $product) }}"
                             class="mt-6 space-y-6" enctype="multipart/form-data">
                             @csrf
@@ -155,8 +154,7 @@
                             </div>
                             @endforeach
                         </div>
-                    </section>
-                </div>
+                    
             </div>
         </div>
     </div>

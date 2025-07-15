@@ -41,41 +41,36 @@ class SellerProductController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'category_id' => 'required|exists:categories,id',
-                'price' => 'required|integer',
-                'discount' => 'required|integer',
-                'details' => 'required|string',
-                'quantity' => 'required|integer',
-                'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg'
-            ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|integer',
+            'discount' => 'required|integer',
+            'details' => 'required|string',
+            'quantity' => 'required|integer',
+            'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+        ]);
 
-            $product = Product::create([
-                'name' => $request->name,
-                'user_id' => Auth::id(),
-                'category_id' => $request->category_id,
-                'price' => $request->price,
-                'discount' => $request->discount,
-                'details' => $request->details,
-                'quantity' => $request->quantity,
-            ]);
+        $product = Product::create([
+            'name' => $request->name,
+            'user_id' => Auth::id(),
+            'category_id' => $request->category_id,
+            'price' => $request->price,
+            'discount' => $request->discount,
+            'details' => $request->details,
+            'quantity' => $request->quantity,
+        ]);
 
-            if ($request->hasFile('photos')) {
-                foreach ($request->file('photos') as $photo) {
-                    $path = $photo->store('products', 'public');
-                    $product->photos()->create(['photo_url' => $path]);
-                }
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('products', 'public');
+                $product->photos()->create(['photo_url' => $path]);
             }
-
-
-            return redirect()->route('seller.products.index')->with('success', 'Product created successfully.');
-        } catch (\Exception $e) {
-            // dd($e);
-            return redirect()->route('seller.products.create')->with('error', 'An error occurred while creating the product.');
         }
+
+        return redirect()->route('seller.products.index')->with('success', 'Product created successfully.');
     }
+
     public function edit(Product $product)
     {
         $categories = Category::all();
@@ -86,42 +81,38 @@ class SellerProductController extends Controller
             'categories' => $categories,
         ]);
     }
+
     public function update(Request $request, Product $product)
     {
-        try {
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'user_id' => 'required|exists:users,id',
-                'category_id' => 'required|exists:categories,id',
-                'price' => 'required|integer',
-                'discount' => 'required|integer',
-                'details' => 'required|string',
-                'quantity' => 'required|integer',
-                'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg'
-            ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'user_id' => 'required|exists:users,id',
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|integer',
+            'discount' => 'required|integer',
+            'details' => 'required|string',
+            'quantity' => 'required|integer',
+            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg'
+        ]);
 
-            $product->update([
-                'name' => $request->name,
-                'user_id' => $request->user_id,
-                'category_id' => $request->category_id,
-                'price' => $request->price,
-                'discount' => $request->discount,
-                'details' => $request->details,
-                'quantity' => $request->quantity,
-            ]);
+        $product->update([
+            'name' => $request->name,
+            'user_id' => $request->user_id,
+            'category_id' => $request->category_id,
+            'price' => $request->price,
+            'discount' => $request->discount,
+            'details' => $request->details,
+            'quantity' => $request->quantity,
+        ]);
 
-            if ($request->hasFile('photos')) {
-                foreach ($request->file('photos') as $photo) {
-                    $path = $photo->store('products', 'public');
-                    $product->photos()->create(['photo_url' => $path]);
-                }
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('products', 'public');
+                $product->photos()->create(['photo_url' => $path]);
             }
-
-            return redirect()->route('seller.products.index')->with('success', 'Product updated successfully.');
-        } catch (\Exception $e) {
-            dd($e);
-            return redirect()->route('seller.products.index')->with('error', 'An error occurred while updating the product.');
         }
+
+        return redirect()->route('seller.products.index')->with('success', 'Product updated successfully.');
     }
 
     public function destroyPhoto(Product $product, Photo $photo)

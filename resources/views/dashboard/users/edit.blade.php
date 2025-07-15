@@ -114,8 +114,7 @@
                                 <x-primary-button>{{ __('Save') }}</x-primary-button>
                             </div>
                         </form>
-                    </section>
-                </div>
+                    
             </div>
         </div>
     </div>

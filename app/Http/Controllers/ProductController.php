@@ -73,31 +73,34 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'user_id' => 'required|exists:users,id|unique:products,user_id',
-                'category_id' => 'required|exists:categories,id',
-                'price' => 'required|integer',
-                'discount' => 'required|integer',
-                'details' => 'required|string',
-                'quantity' => 'required|integer',
-            ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|integer',
+            'discount' => 'required|integer',
+            'details' => 'required|string',
+            'quantity' => 'required|integer',
+            'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+        ]);
 
-            Product::create([
-                'name' => $request->name,
-                'user_id' => $request->user_id,
-                'category_id' => $request->category_id,
-                'price' => $request->price,
-                'discount' => $request->discount,
-                'details' => $request->details,
-                'quantity' => $request->quantity,
-            ]);
+        $product = Product::create([
+            'name' => $request->name,
+            'user_id' => Auth::id(),
+            'category_id' => $request->category_id,
+            'price' => $request->price,
+            'discount' => $request->discount,
+            'details' => $request->details,
+            'quantity' => $request->quantity,
+        ]);
 
-            return redirect()->route('products.index')->with('success', 'Product created successfully.');
-        } catch (\Exception $e) {
-            return redirect()->route('products.index')->with('error', 'An error occurred while creating the product.');
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('products', 'public');
+                $product->photos()->create(['photo_url' => $path]);
+            }
         }
+
+        return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
     public function create()
     {
@@ -123,40 +126,38 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        try {
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'user_id' => 'required|exists:users,id',
-                'category_id' => 'required|exists:categories,id',
-                'price' => 'required|integer',
-                'discount' => 'required|integer',
-                'details' => 'required|string',
-                'enable' => 'required|in:TRUE,FALSE',
-                'quantity' => 'required|integer',
-                'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg'
-            ]);
 
-            $product->update([
-                'name' => $request->name,
-                'user_id' => $request->user_id,
-                'category_id' => $request->category_id,
-                'price' => $request->price,
-                'discount' => $request->discount,
-                'details' => $request->details,
-                'enabled' => $request->enable,
-                'quantity' => $request->quantity,
-            ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'user_id' => 'required|exists:users,id',
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|integer',
+            'discount' => 'required|integer',
+            'details' => 'required|string',
+            'enable' => 'required|in:TRUE,FALSE',
+            'quantity' => 'required|integer',
+            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg'
+        ]);
 
-            if ($request->hasFile('photos')) {
-                foreach ($request->file('photos') as $photo) {
-                    $path = $photo->store('products', 'public');
-                    $product->photos()->create(['photo' => $path]);
-                }
+        $product->update([
+            'name' => $request->name,
+            'user_id' => $request->user_id,
+            'category_id' => $request->category_id,
+            'price' => $request->price,
+            'discount' => $request->discount,
+            'details' => $request->details,
+            'enabled' => $request->enable,
+            'quantity' => $request->quantity,
+        ]);
+
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('products', 'public');
+                $product->photos()->create(['photo' => $path]);
             }
-            return redirect()->route('products.index')->with('success', 'Product updated successfully.');
-        } catch (\Exception $e) {
-            return redirect()->route('products.index')->with('error', 'An error occurred while updating the product.');
         }
+
+        return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
     public function destroy(Product $product)
     {
