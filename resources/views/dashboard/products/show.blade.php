@@ -49,7 +49,7 @@
                         <p><span class="font-bold">Enabled:</span> {{ $product->enable ? 'Yes' : 'No' }}</p>
                         <p><span class="font-bold">Details:</span> {{ $product->details }}</p>
                     </div>
-                    <a href="{{ route('manageProducts') }}" class="bg-p-medium hover:bg-p-light text-white font-bold py-2 px-4 rounded">
+                    <a href="{{ route('products.index') }}" class="bg-p-medium hover:bg-p-light text-white font-bold py-2 px-4 rounded">
                         Back to Products
                     </a>
                 </div>

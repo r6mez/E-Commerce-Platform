@@ -37,8 +37,7 @@
             </div>
             @endif
             <div class="p-4 sm:p-8 bg-p-dark shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    <section>
+                
                         <form method="POST" action="{{ route('products.update', $product) }}"
                             class="mt-6 space-y-6" enctype="multipart/form-data">
                             @csrf
@@ -112,7 +111,7 @@
                             </div>
                             
                             <div> 
-                                <x-input-label for="enable" :value="Enable" class="text-p-light"/>
+                                <x-input-label for="enable" value="Enable" class="text-p-light"/>
                                 <x-select-input id="enable" name="enable" class="mt-1 block w-full rounded-md text-p-light shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 bg-p-medium">
                                     <option value="TRUE" {{ old('enable', $product->enable) == 'TRUE' ? 'selected' : '' }}>
                                         TRUE
@@ -155,8 +154,7 @@
                             </div>
                             @endforeach
                         </div>
-                    </section>
-                </div>
+                    
             </div>
         </div>
     </div>

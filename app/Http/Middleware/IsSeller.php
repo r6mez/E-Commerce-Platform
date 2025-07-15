@@ -15,7 +15,7 @@ class IsSeller
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!$request->user() && ($request->user()->type != "seller" || $request->user()->type != "admin")){
+        if(!$request->user() || $request->user()->type == "user"){
             abort(403);
         }
         return $next($request);

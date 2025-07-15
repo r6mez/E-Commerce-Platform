@@ -45,7 +45,7 @@
                         <p><span class="font-bold">Amount:</span> {{ $order->amount }}</p>
                         <p><span class="font-bold">Status:</span> {{ $order->status }}</p>
                     </div>
-                    <a href="{{ route('manageOrders') }}" class="bg-p-medium hover:bg-p-light text-white font-bold py-2 px-4 rounded">
+                    <a href="{{ route('orders.index') }}" class="bg-p-medium hover:bg-p-light text-white font-bold py-2 px-4 rounded">
                         Back to Orders
                     </a>
                 </div>

@@ -7,7 +7,7 @@
             <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
                 Step back in time and explore a curated collection of authentic World War II memorabilia and artifacts.
             </p>
-            <a href="#" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 ease-in-out transform hover:scale-105">
+            <a href="{{ route("product.index") }}" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 ease-in-out transform hover:scale-105">
                 Shop the Collection
             </a>
         </div>
@@ -36,12 +36,14 @@
     <section class="py-16 bg-p-medium/40 text-p-light">
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-12">Explore Our Categories</h2>
-            <div class="flex overflow-x-auto space-x-4 pb-4 scrollbar-hide"> 
-                @foreach($categories as $category)
-                    <a href="#" class="flex-shrink-0 bg-p-dark hover:bg-p-dark/60 text-p-light font-bold py-3 px-6 rounded-full text-lg transition duration-300 ease-in-out">
-                        {{ $category->name }}
-                    </a>
-                @endforeach
+            <div class="flex justify-center">
+                <div class="flex overflow-x-auto space-x-4 pb-4 scrollbar-hide px-2 max-w-full">
+                    @foreach($categories as $category)
+                        <a class="flex-shrink-0 bg-p-dark hover:bg-p-dark/60 text-p-light font-bold py-3 px-6 rounded-full text-lg transition duration-300 ease-in-out">
+                            {{ $category->name }}
+                        </a>
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>

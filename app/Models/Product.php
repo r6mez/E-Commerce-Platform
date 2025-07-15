@@ -12,6 +12,8 @@ class Product extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    protected $fillable = ['name', 'description', 'price', 'stock', 'user_id', 'category_id', 'discount'];
     
     public function user() : BelongsTo {
         return $this->belongsTo(User::class);

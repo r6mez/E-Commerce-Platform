@@ -37,9 +37,9 @@ class CountryController extends Controller
                 'usd_value',
             ]));
 
-            return redirect()->route('manageCountries')->with('success', 'Country created successfully.');
+            return redirect()->route('countries.index')->with('success', 'Country created successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('manageCountries')->with('error', 'An error occurred while creating the country.');
+            return redirect()->route('countries.index')->with('error', 'An error occurred while creating the country.');
         }
     }
 
@@ -67,9 +67,9 @@ class CountryController extends Controller
                 'usd_value',
             ]));
 
-            return redirect()->route('manageCountries')->with('success', 'Country updated successfully.');
+            return redirect()->route('countries.index')->with('success', 'Country updated successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('manageCountries')->with('error', 'An error occurred while updating the country.');
+            return redirect()->route('countries.index')->with('error', 'An error occurred while updating the country.');
         }
     }
 
@@ -77,9 +77,9 @@ class CountryController extends Controller
     {
         try {
             $country->delete();
-            return redirect()->route('manageCountries')->with('success', 'Country deleted successfully.');
+            return redirect()->route('countries.index')->with('success', 'Country deleted successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('manageCountries')->with('error', 'An error occurred while deleting the country.');
+            return redirect()->route('countries.index')->with('error', 'An error occurred while deleting the country.');
         }
     }
 }
