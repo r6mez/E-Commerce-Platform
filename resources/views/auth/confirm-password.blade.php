@@ -20,6 +20,7 @@
 
         <div class="flex justify-end mt-4">
             <x-primary-button>
+                <x-icon name="check" class="w-5 h-5 mr-2" />
                 {{ __('Confirm') }}
             </x-primary-button>
         </div>

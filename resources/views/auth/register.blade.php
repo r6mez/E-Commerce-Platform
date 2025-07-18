@@ -55,6 +55,7 @@
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button>
+                <x-icon name="user-plus" class="w-5 h-5 mr-2" />
                 {{ __('Register') }}
             </x-primary-button>
         </div>
