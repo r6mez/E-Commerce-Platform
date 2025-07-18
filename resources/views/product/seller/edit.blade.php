@@ -121,22 +121,23 @@
 
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6 mt-2 mb-2">
                     @foreach($product->photos as $photo)
-                    <div class="photo-item relative inline-block m-2">
-                        <img src="{{ $photo->photo_url }}" alt="Photo {{ $loop->iteration }}"
-                            class="w-32 h-32 object-cover rounded shadow" />
-                        <form method="post" action="{{ route('seller.products.photos.destroy', [$product, $photo]) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button
-                                class="delete-photo-btn absolute top-1 right-1 bg-red-600 text-white px-2 py-1 rounded text-xs inline-flex items-center"
-                                type="submit">
-                                <x-icon name="trash" solid class="w-4 h-4 mr-1" />
-                                Delete
-                            </button>
-                        </form>
-                    </div>
+                        <div class="relative m-2 w-32 h-32">
+                            <img src="{{ $photo->photo_url }}" alt="Photo {{ $loop->iteration }}"
+                                class="w-full h-full object-cover rounded shadow" />
+                            
+                            <form method="post" action="{{ route('products.photos.destroy', [$product, $photo]) }}"
+                                class="absolute top-1 right-1 z-10">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="bg-red-600 text-white px-2 py-1 rounded text-xs shadow">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
                     @endforeach
                 </div>
+
             </div>
         </div>
     </div>
