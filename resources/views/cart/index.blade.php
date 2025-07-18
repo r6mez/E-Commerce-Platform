@@ -54,9 +54,9 @@
                                                 <input type="hidden" name="user_id" value="{{ $item->user_id }}">
                                                 <input type="hidden" name="product_id" value="{{ $item->product_id }}">
                                                 <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" max="{{ $item->product->quantity }}" class="w-16 rounded bg-p-medium text-p-light border border-p-light/20 hide-number-spin">
-                                                <button type="submit" class="px-2 py-1 bg-p-light text-p-dark rounded hover:bg-p-light/80 text-xs font-semibold inline-flex items-center">
-                                                    <x-icon name="check" class="w-4 h-4 mr-1" />
-                                                    Update
+                                                <button type="submit" class="w-16 h-12 text-p-light rounded hover:bg-p-dark/60 text-xs font-semibold flex flex-col items-center justify-center">
+                                                    <x-icon name="check" class="w-4 h-4" />
+                                                    <span>Update</span>
                                                 </button>
                                             </form>
                                         </td>
@@ -77,14 +77,14 @@
                         </table>
                     </div>
                     <div class="flex justify-end mt-8">
-                        <div class="bg-p-medium rounded-lg p-6 shadow-md w-full max-w-xs">
+                        <div class="bg-p-medium/70 rounded-lg p-2 shadow-md w-full max-w-xs">
                             <div class="flex justify-between items-center mb-4">
                                 <span class="text-lg font-semibold text-p-light">Total:</span>
                                 <span class="text-2xl font-bold text-p-light">{{ $userCurrencySymbol }}{{ number_format($total, 2) }}</span>
                             </div>
                             <form action="{{ route('cart.checkout') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200 inline-flex items-center justify-center">
+                                <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-p-dark font-bold py-3 px-6 rounded-lg transition duration-200 inline-flex items-center justify-center">
                                     <x-icon name="credit-card" class="w-5 h-5 mr-2" />
                                     Checkout
                                 </button>

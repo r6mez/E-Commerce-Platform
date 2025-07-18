@@ -57,10 +57,4 @@
             </div>
         </div>
     </div>
-
-    <footer class="bg-p-dark text-p-light py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; {{ date('Y') }} WW2 E-Commerce Platform. All rights reserved.</p>
-        </div>
-    </footer>
 </x-app-layout>
