@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex min-h-screen">
+    <div class="flex">
         <div class="flex-1 p-8">
             @foreach ($orders as $order)
             <div class="bg-p-dark/90 shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row mb-6 max-w-4xl mx-auto">

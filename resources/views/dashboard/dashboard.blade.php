@@ -1,12 +1,12 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
             <div class="md:col-span-2 lg:col-span-4 bg-p-dark p-6 rounded-lg shadow-md">
                 <h3 class="text-lg font-semibold text-p-light mb-4">🌍 Top Selling Countries</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-center">
                     @foreach ($topCountries as $country)
                         <div class="flex flex-col items-center">
-                            <span class="text-6xl mb-2">
+                            <span class="text-8xl mb-2">
                                 @php
                                     $iso = strtoupper(trim($country->iso_code));
                                     $emoji = '';
@@ -22,7 +22,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="md:col-span-2 lg:col-span-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="md:col-span-2 lg:col-span-4 grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="bg-p-dark p-6 rounded-lg shadow-md">
                     <h3 class="text-lg font-semibold text-p-light">💰 Total Revenue</h3>
                     <p class="text-3xl font-bold text-p-light/80 mt-4">${{ number_format($totalRevenue, 2) }}</p>

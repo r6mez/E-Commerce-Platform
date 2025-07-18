@@ -11,7 +11,7 @@ class CountryController extends Controller
     {
         $countries = Country::all();
 
-        return view('dashboard.countries.manage', compact('countries'));
+        return view('dashboard.countries.index', compact('countries'));
     }
 
     public function create()

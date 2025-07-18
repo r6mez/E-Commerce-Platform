@@ -19,7 +19,7 @@ class OrdersController extends Controller
     {
         $orders = Order::with(['user', 'product'])->get();
 
-        return view('dashboard.orders.manage', compact('orders'));
+        return view('dashboard.orders.index', compact('orders'));
     }
 
     public function show(Order $order)

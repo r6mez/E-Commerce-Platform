@@ -69,7 +69,7 @@ class ProductController extends Controller
     {
         $products = Product::orderBy('id')->get();
 
-        return view('dashboard.products.manage', compact('products'));
+        return view('dashboard.products.index', compact('products'));
     }
 
     public function store(Request $request)

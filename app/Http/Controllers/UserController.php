@@ -14,7 +14,7 @@ class UserController extends Controller
     {
         $users = User::orderBy('id')->get();
 
-        return view('dashboard.users.manage', compact('users'));
+        return view('dashboard.users.index', compact('users'));
     }
 
     public function create()
@@ -99,6 +99,6 @@ class UserController extends Controller
 
     public function show(User $user): View
     {
-        return view('dashboard.users.orders', compact('user'));
+        return view('dashboard.users.show', compact('user'));
     }
 }

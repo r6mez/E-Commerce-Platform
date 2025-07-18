@@ -9,7 +9,7 @@ Route::middleware(['seller'])->prefix('seller')->name('seller.')->group(function
     Route::get('/emailCSV/{reciver}', [SellerController::class, 'emailCSV'])->name('products.email');
 
     Route::prefix('products')->name('products.')->group(function () {
-        Route::delete('/{product}/photo/{photo}', [SellerProductController::class, 'destroyPhotoForSeller'])->name('photos.destroy');
+        Route::delete('/{product}/photo/{photo}', [SellerProductController::class, 'destroyPhoto'])->name('photos.destroy');
         Route::get('', [SellerProductController::class, 'index'])->name('index');
         Route::get('/create', [SellerProductController::class, 'create'])->name('create');
         Route::post('', [SellerProductController::class, 'store'])->name('store');
