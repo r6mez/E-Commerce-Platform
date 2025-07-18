@@ -13,6 +13,7 @@
                                 @endforeach
                             </select>
                             <button type="submit" class="inline-flex items-center px-4 py-2 bg-p-light border-transparent rounded-md font-semibold text-xs text-p-dark uppercase tracking-widest hover:bg-p-light/70 active:bg-p-light/80 disabled:opacity-25 transition ease-in-out duration-150 w-full sm:w-auto">
+                                <x-icon name="adjustments-horizontal" class="w-4 h-4 mr-1" />
                                 Filter
                             </button>
                         </div>

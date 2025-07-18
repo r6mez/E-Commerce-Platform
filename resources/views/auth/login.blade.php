@@ -22,6 +22,7 @@
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button>
+                <x-icon name="arrow-right-on-rectangle" class="w-5 h-5 mr-2" />
                 {{ __('Log in') }}
             </x-primary-button>
         </div>

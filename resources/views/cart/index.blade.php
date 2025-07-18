@@ -54,7 +54,10 @@
                                                 <input type="hidden" name="user_id" value="{{ $item->user_id }}">
                                                 <input type="hidden" name="product_id" value="{{ $item->product_id }}">
                                                 <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" max="{{ $item->product->quantity }}" class="w-16 rounded bg-p-medium text-p-light border border-p-light/20 hide-number-spin">
-                                                <button type="submit" class="px-2 py-1 bg-p-light text-p-dark rounded hover:bg-p-light/80 text-xs font-semibold">Update</button>
+                                                <button type="submit" class="px-2 py-1 bg-p-light text-p-dark rounded hover:bg-p-light/80 text-xs font-semibold inline-flex items-center">
+                                                    <x-icon name="check" class="w-4 h-4 mr-1" />
+                                                    Update
+                                                </button>
                                             </form>
                                         </td>
                                         <td class="px-4 py-4 text-p-light/90">{{ $userCurrencySymbol }}{{ number_format($subtotal, 2) }}</td>
@@ -62,7 +65,10 @@
                                             <form action="{{ route('cart.destroy', $item) }}" method="POST" onsubmit="return confirm('Remove this item from cart?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-red-500 hover:text-red-700 font-bold">Remove</button>
+                                                <button type="submit" class="text-red-500 hover:text-red-700 font-bold inline-flex items-center">
+                                                    <x-icon name="trash" solid class="w-4 h-4 mr-1" />
+                                                    Remove
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -78,7 +84,10 @@
                             </div>
                             <form action="{{ route('cart.checkout') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200">Checkout</button>
+                                <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200 inline-flex items-center justify-center">
+                                    <x-icon name="credit-card" class="w-5 h-5 mr-2" />
+                                    Checkout
+                                </button>
                             </form>
                         </div>
                     </div>

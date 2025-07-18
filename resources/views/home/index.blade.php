@@ -7,7 +7,8 @@
             <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
                 Step back in time and explore a curated collection of authentic World War II memorabilia and artifacts.
             </p>
-            <a href="{{ route("product.index") }}" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 ease-in-out transform hover:scale-105">
+            <a href="{{ route("product.index") }}" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 ease-in-out transform hover:scale-105 inline-flex items-center">
+                <x-icon name="shopping-cart" class="w-6 h-6 mr-2" />
                 Shop the Collection
             </a>
         </div>
@@ -24,7 +25,10 @@
                             <h3 class="font-bold text-2xl text-p-light">{{ $product->name }}</h3>
                             <div class="flex justify-between items-center">
                                 <span class="text-xl font-bold text-p-light/70">{{ $product->user->country->currency_symbol }}{{ $product->price }}</span>
-                                <a href="/products/{{ $product->id }}" class="bg-p-light hover:bg-p-light/80 text-p-dark font-bold py-2 px-4 rounded-full text-sm transition duration-300">View Details</a>
+                                <a href="/products/{{ $product->id }}" class="bg-p-light hover:bg-p-light/80 text-p-dark font-bold py-2 px-4 rounded-full text-sm transition duration-300 inline-flex items-center">
+                                    <x-icon name="eye" class="w-4 h-4 mr-1" />
+                                    View Details
+                                </a>
                             </div>
                         </div>
                     </div>
