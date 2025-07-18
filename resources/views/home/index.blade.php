@@ -43,9 +43,14 @@
             <div class="flex justify-center">
                 <div class="flex overflow-x-auto space-x-4 pb-4 scrollbar-hide px-2 max-w-full">
                     @foreach($categories as $category)
-                        <a class="flex-shrink-0 bg-p-dark hover:bg-p-dark/60 text-p-light font-bold py-3 px-6 rounded-full text-lg transition duration-300 ease-in-out">
-                            {{ $category->name }}
-                        </a>
+                        <form action="{{ route('product.index') }}" method="GET" class="category-form flex items-center flex-shrink-0">
+                            <input type="hidden" name="category" value="{{ $category->id }}">
+                            <a href="#" 
+                            onclick="this.closest('form').submit(); return false;" 
+                            class="flex-shrink-0 bg-p-dark hover:bg-p-dark/60 text-p-light font-bold py-3 px-6 rounded-full text-lg transition duration-300 ease-in-out">
+                                {{ $category->name }}
+                            </a>
+                        </form> 
                     @endforeach
                 </div>
             </div>
