@@ -1,8 +1,8 @@
-# 🛍️ E-Commerce Platform
+# E-Commerce Platform
 
 A feature-rich, modern e-commerce platform built with the Laravel framework. This project provides a complete online shopping experience, from browsing products to completing orders, with additional features for sellers and administrators.
 
-## ✨ Features
+## Features
 
 - **User Authentication:** Secure login and registration functionality.
 - **Product Management:** Sellers can add, edit, and delete their products.
@@ -16,7 +16,7 @@ A feature-rich, modern e-commerce platform built with the Laravel framework. Thi
 - **Admin Statistics:** View key statistics and metrics on the admin dashboard.
 
 
-## 💻 Tech Stack
+## Tech Stack
 - **Backend:**
   - *Framework:* Laravel 12
   - *Database:* Postgres on Supabase 
@@ -27,7 +27,7 @@ A feature-rich, modern e-commerce platform built with the Laravel framework. Thi
   - *endroid/qr-code:* for generating QR Codes
 
 
-## 💾 Database Schema
+## Database Schema
 
 ![ERD](assets/ERD.png)
 
@@ -39,7 +39,7 @@ A feature-rich, modern e-commerce platform built with the Laravel framework. Thi
 - **`orders`**: Records user orders.
 - **`cartItems`**: Manages items in a user's shopping cart.
 
-## 🛂 Middleware
+## Middleware
 
 ![MiddleWares](/assets/middlewares.png)
 
@@ -48,7 +48,7 @@ A feature-rich, modern e-commerce platform built with the Laravel framework. Thi
 - **`IsSeller`**: Restricts access to routes for sellers and admins.
 
 
-## 🗺️ Routing
+## Routing
 The application's routes are organized into several files in the `routes/` directory:
 
 - **`web.php`**: The main entry point for web routes, including the home page.
@@ -57,7 +57,7 @@ The application's routes are organized into several files in the `routes/` direc
 - **`seller.php`**: Contains routes for sellers, such as managing their products and exporting data.
 - **`dashboard.php`**: Defines routes for the admin dashboard, which includes user, country, product, and order management.
 
-## ⚙️ Controllers
+## Controllers
 
 The controllers in `app/Http/Controllers` handle the application's business logic:
 
@@ -74,7 +74,7 @@ The controllers in `app/Http/Controllers` handle the application's business logi
 - **`SellerProductController`**: Manages products for sellers.
 - **`UserController`**: Manages users in the admin dashboard.
 
-## 🖼️ Views
+## Views
 ### Home Page:
 ![](assets/home.png)
 ### Market Page:
@@ -94,7 +94,7 @@ The controllers in `app/Http/Controllers` handle the application's business logi
 ### Email:
 ![](assets/email.png)
 
-## 🚀 Project Setup
+## Project Setup
 
 1.  **Clone the repository:**
     ```bash
